@@ -88,7 +88,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
 
           //app slogan
           Text(
-            "Create a new account",
+            "Start working",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,
@@ -108,6 +108,9 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
             focusnext: passWordFocus,
             ),
           SizedBox(height: 10,),
+
+          
+
 
           //password textfield
           MyTextfield(

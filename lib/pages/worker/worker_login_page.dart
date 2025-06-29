@@ -17,10 +17,8 @@ class WorkerLoginPage extends StatefulWidget {
 class _WorkerLoginPageState extends State<WorkerLoginPage> {
 
   final emailController = TextEditingController();
-  final nameController = TextEditingController();
   final passwordController = TextEditingController();
   final emailFocus = FocusNode();
-  final nameFocus = FocusNode();
   final passWordFocus = FocusNode();
   final focussubmission = FocusNode();
   final formkey = GlobalKey<FormState>();
@@ -60,7 +58,7 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
           children: [
             Spacer(),
             IconButton(
-              icon: FaIcon(FontAwesomeIcons.user),
+              icon: FaIcon(FontAwesomeIcons.userShield),
               color: Theme.of(context).colorScheme.inversePrimary,
               onPressed: () {
                 Navigator.pop(context);
@@ -76,7 +74,7 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
         children: [
           //logo
           Lottie.asset(
-            'assets/deliver_log_reg.json',
+            'assets/server.json',
             width: 200,
             height: 200,
             fit: BoxFit.contain,
@@ -103,18 +101,8 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
             obscureText: false, 
             controller: emailController,
             focusNode: emailFocus,
-            focusnext: nameFocus,
-            ),
-          SizedBox(height: 10,),
-
-          //Name of fastfood
-          MyTextfield(
-            hintText: "Enter the name of your restaurant", 
-            obscureText: false, 
-            controller: nameController,
-            focusNode: nameFocus,
             focusnext: passWordFocus,
-          ),
+            ),
           SizedBox(height: 10,),
 
           //password textfield

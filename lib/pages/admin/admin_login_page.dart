@@ -18,10 +18,8 @@ class AdminLoginPage extends StatefulWidget {
 class _AdminLoginPageState extends State<AdminLoginPage> {
 
   final emailController = TextEditingController();
-  final nameController = TextEditingController();
   final passwordController = TextEditingController();
   final emailFocus = FocusNode();
-  final nameFocus = FocusNode();
   final passWordFocus = FocusNode();
   final focussubmission = FocusNode();
   final formkey = GlobalKey<FormState>();
@@ -61,7 +59,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
           children: [
             Spacer(),
             IconButton(
-              icon: FaIcon(FontAwesomeIcons.motorcycle),
+              icon: FaIcon(FontAwesomeIcons.users),
               color: Theme.of(context).colorScheme.inversePrimary,
               onPressed: () {
                 Navigator.push(
@@ -70,7 +68,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 );
               },
             ),
-            SizedBox(width: 5,)
+            SizedBox(width: 2,)
           ],
         ),
       ),
@@ -80,7 +78,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
         children: [
           //logo
           Lottie.asset(
-            'assets/log_reg.json',
+            'assets/admin.json',
             width: 200,
             height: 200,
             fit: BoxFit.contain,
@@ -90,7 +88,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
 
           //app slogan
           Text(
-            "Food Delivery App",
+            "Manage your restaurant",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,
@@ -107,18 +105,8 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             obscureText: false, 
             controller: emailController,
             focusNode: emailFocus,
-            focusnext: nameFocus,
-            ),
-          SizedBox(height: 10,),
-
-          //Name 
-          MyTextfield(
-            hintText: "Enter your name", 
-            obscureText: false, 
-            controller: nameController,
-            focusNode: nameFocus,
             focusnext: passWordFocus,
-          ),
+            ),
           SizedBox(height: 10,),
 
           //password textfield
@@ -134,7 +122,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
           MyButton(
             onTap: login,
             text: "Log in",
-            color: Colors.blueAccent,
+            color: Colors.blue,
             ),
           SizedBox(height: 20,),
 

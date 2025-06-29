@@ -82,7 +82,7 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
         children: [
           //logo
           Lottie.asset(
-            'assets/log_reg.json',
+            'assets/admin.json',
             width: 200,
             height: 200,
             fit: BoxFit.contain,
