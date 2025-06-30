@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:manage_restaurant/components/lottie_listener.dart';
 import 'package:manage_restaurant/components/my_button.dart';
+import 'package:manage_restaurant/components/my_dropdownbuttonformfield.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
 import 'package:manage_restaurant/pages/worker/worker_home_page.dart';
-import 'package:lottie/lottie.dart';
 
 class WorkerRegisterPage extends StatefulWidget {
 
@@ -26,6 +27,9 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
   final confirmPassWordFocus = FocusNode();
   final focussubmission = FocusNode();
   final formkey = GlobalKey<FormState>();
+  List<String> choices = ["waiter","Kitchen manager", "Deliver"];
+  final String? choice = null;
+  ValueNotifier<String> choicelistener = ValueNotifier('assets/server.json');
 
   void submission(){
     if(focussubmission.hasFocus){
@@ -53,6 +57,18 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
       MaterialPageRoute(builder: (context)=> const WorkerHomePage(),)
     );
   }
+  /*String lottie(){
+    if (choice == null || choice == 'waiter'){
+      return 'assets/server.json';
+    }
+    if (choice == 'Deliver'){
+      return 'assets/deliver.json';
+    }
+    if (choice == 'Kitchen manager'){
+      return 'assets/kitchen_manager.json';
+    }
+    return 'assets/server.json';
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +93,10 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           //logo
-          Lottie.asset(
-            'assets/deliver_log_reg.json',
-            width: 200,
-            height: 200,
-            fit: BoxFit.contain,
-          ),
-
+          LottiListener(
+            listener:choicelistener, 
+            height: 200, 
+            width: 200),
           const SizedBox(height: 25),
 
           //app slogan
@@ -109,8 +122,14 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
             ),
           SizedBox(height: 10,),
 
-          
-
+          //RoleDropdownbutton 
+          MyDropdownbuttonformfield(
+            hintText: "Choose a role", 
+            choice: choice, 
+            champ: "Role",
+            choices: choices,
+            listener: choicelistener,),
+          SizedBox(height: 10,),
 
           //password textfield
           MyTextfield(

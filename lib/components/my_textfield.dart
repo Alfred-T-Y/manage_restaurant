@@ -8,7 +8,6 @@ class MyTextfield extends StatelessWidget {
   final FocusNode? focusNode;
   final FocusNode? focusnext;
   final String? champ; 
-  final FocusNode? focussubmission;
 
   const MyTextfield({super.key,
   required this.hintText,
@@ -17,7 +16,6 @@ class MyTextfield extends StatelessWidget {
   this.focusNode,
   this.focusnext,
   this.champ,
-  this.focussubmission,
   });
 
   @override
@@ -46,12 +44,12 @@ class MyTextfield extends StatelessWidget {
         onEditingComplete: () {
           FocusScope.of(context).requestFocus(focusnext);
         },
-      validator: (value){
-        if(value!.isEmpty){
-          return 'Please enter the $champ';
-        }
+        validator: (value){
+          if(value!.isEmpty){
+            return 'Please enter the $champ';
+          }
         return null;
-      },
+        },
       ),
     );
   }
