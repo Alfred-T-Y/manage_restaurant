@@ -25,10 +25,7 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
 
   void submission(){
     if(focussubmission.hasFocus){
-      if(formkey.currentState!.validate()){
-        focussubmission.unfocus();
-        (){};
-      }
+      login();
     }
   }
 
@@ -44,10 +41,13 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
     //authentification
 
     //home page
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context)=> const WorkerHomePage(),)
-    );
+    if(formkey.currentState!.validate()){
+      focussubmission.unfocus();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context)=> const WorkerHomePage(),)
+      );
+    }
   }
 
   @override
@@ -64,7 +64,6 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
                 Navigator.pop(context);
               },
             ),
-            SizedBox(width: 5,)
           ],
         ),
       ),
@@ -74,7 +73,7 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
         children: [
           //logo
           Lottie.asset(
-            'assets/server.json',
+            'assets/worker_login.json',
             width: 200,
             height: 200,
             fit: BoxFit.contain,
@@ -118,7 +117,7 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
           MyButton(
             onTap: login,
             text: "Log in",
-            color: Colors.greenAccent,
+            color: const Color.fromARGB(255, 2, 122, 64),
             ),
           SizedBox(height: 20,),
 
@@ -142,7 +141,8 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
                 ),
               ),
             ],
-          )
+          ),
+          SizedBox(height: 10,),
         ],
       ),
     );

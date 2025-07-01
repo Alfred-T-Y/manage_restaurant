@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:manage_restaurant/components/lottie_listener.dart';
+import 'package:lottie/lottie.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 import 'package:manage_restaurant/components/my_dropdownbuttonformfield.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
@@ -19,6 +19,8 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
 
   final emailController = TextEditingController();
   final nameController = TextEditingController();
+  final idController = TextEditingController();
+  final idFocus = FocusNode();
   final passwordController = TextEditingController();
   final confirmPassWordController = TextEditingController();
   final emailFocus = FocusNode();
@@ -27,16 +29,15 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
   final confirmPassWordFocus = FocusNode();
   final focussubmission = FocusNode();
   final formkey = GlobalKey<FormState>();
-  List<String> choices = ["waiter","Kitchen manager", "Deliver"];
+  List<String> choices = ["Waiter","Kitchen manager","Deliver","Manager"];
   final String? choice = null;
-  ValueNotifier<String> choicelistener = ValueNotifier('assets/server.json');
+  ValueNotifier<String> choicelistener = ValueNotifier('Waiter');
+  Color buttoncolor = Colors.greenAccent;
+
 
   void submission(){
     if(focussubmission.hasFocus){
-      if(formkey.currentState!.validate()){
-        focussubmission.unfocus();
-        (){};
-      }
+      signup();
     }
   }
 
@@ -52,10 +53,13 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
     //authentification
 
     //home page
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context)=> const WorkerHomePage(),)
-    );
+    if(formkey.currentState!.validate() && choice != null){
+      focussubmission.unfocus();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context)=> const WorkerHomePage(),)
+      );
+    }
   }
   /*String lottie(){
     if (choice == null || choice == 'waiter'){
@@ -72,124 +76,160 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-        title:Row(
-          children: [
-            Spacer(),
-            IconButton(
-              icon: FaIcon(FontAwesomeIcons.user),
-              color: Theme.of(context).colorScheme.inversePrimary,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            SizedBox(width: 5,)
-          ],
-        ),
-      ),
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          //logo
-          LottiListener(
-            listener:choicelistener, 
-            height: 200, 
-            width: 200),
-          const SizedBox(height: 25),
-
-          //app slogan
-          Text(
-            "Start working",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.italic,
-              fontSize: 16,
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
-          ),
-
-          const SizedBox(height: 25),
-          
-          //emailtextfield
-          MyTextfield(
-            hintText: "Email", 
-            obscureText: false, 
-            controller: emailController,
-            focusNode: emailFocus,
-            focusnext: passWordFocus,
-            ),
-          SizedBox(height: 10,),
-
-          //RoleDropdownbutton 
-          MyDropdownbuttonformfield(
-            hintText: "Choose a role", 
-            choice: choice, 
-            champ: "Role",
-            choices: choices,
-            listener: choicelistener,),
-          SizedBox(height: 10,),
-
-          //password textfield
-          MyTextfield(
-            hintText: "Password", 
-            obscureText: true, 
-            controller: passwordController,
-            focusNode: passWordFocus,
-            focusnext: confirmPassWordFocus,
-            ),
-          SizedBox(height: 10,),
-
-          //Name of fastfood
-          MyTextfield(
-            hintText: "Enter the name of your restaurant", 
-            obscureText: false, 
-            controller: nameController,
-            focusNode: nameFocus,
-            focusnext: passWordFocus,
-          ),
-          SizedBox(height: 10,),
-
-          //confirm password textfield
-          MyTextfield(
-            hintText: "Confirm the password", 
-            obscureText: true, 
-            controller: confirmPassWordController,
-            focusNode: confirmPassWordFocus,),
-          SizedBox(height: 10,),
-
-          //sign up button
-          MyButton(
-            onTap: signup,
-            text: "Sign up",
-            color: Colors.greenAccent,
-            ),
-          SizedBox(height: 20,),
-
-          //Log in
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Already have a account?",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+    return ValueListenableBuilder<String>(
+      valueListenable: choicelistener,
+      builder:(context, animationPath, child) {
+        switch(animationPath){
+          case "Waiter":
+            animationPath = "assets/server.json";
+            buttoncolor = const Color.fromARGB(255, 15, 224, 123);
+            break;
+          case "Kitchen manager":
+            animationPath = "assets/kitchen_manager.json";
+            buttoncolor = const Color.fromARGB(255, 8, 202, 14);
+            break;
+          case "Deliver":
+            animationPath = "assets/deliver.json";
+            buttoncolor = const Color.fromARGB(255, 25, 1, 112);
+            break;
+          case "Manager":
+            animationPath = "assets/manager.json";
+            buttoncolor = const Color.fromARGB(255, 146, 144, 23);
+            break;
+        }
+        return Scaffold(
+          appBar: AppBar(
+            title:Row(
+              children: [
+                Spacer(),
+                IconButton(
+                  icon: FaIcon(FontAwesomeIcons.userShield),
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
-              ),
-              SizedBox(width: 5,),
-              GestureDetector(
-                onTap: widget.onTap,
-                child: Text("Log in",
+              ],
+            ),
+          ),
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //logo
+                Lottie.asset(
+                  animationPath,
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(height: 25),
+            
+                //app slogan
+                Text(
+                  "Start working",
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.inversePrimary,
                     fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 16,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ),
-              ),
-            ],
-          )
-        ],
-      ),
+                    
+                const SizedBox(height: 25),
+                
+                //emailtextfield
+                MyTextfield(
+                  hintText: "Email", 
+                  obscureText: false, 
+                  controller: emailController,
+                  focusNode: emailFocus,
+                  focusnext: nameFocus,
+                  ),
+                SizedBox(height: 10,),
+            
+                //name
+                MyTextfield(
+                  hintText: "Name and Firstname", 
+                  obscureText: false, 
+                  controller: nameController,
+                  focusNode: nameFocus,
+                  focusnext: idFocus,
+                  ),
+                SizedBox(height: 10,),
+                    
+                //RoleDropdownbutton 
+                MyDropdownbuttonformfield(
+                  hintText: "Role", 
+                  choice: choice, 
+                  champ: "Role",
+                  choices: choices,
+                  listener: choicelistener,),
+                SizedBox(height: 10,),
+            
+                //employer's id
+                MyTextfield(
+                  hintText: "Employer's ID", 
+                  obscureText: false, 
+                  controller: idController,
+                  focusNode: idFocus,
+                  focusnext: passWordFocus,
+                ),
+                SizedBox(height: 10,),
+                    
+                //password textfield
+                MyTextfield(
+                  hintText: "Password", 
+                  obscureText: true, 
+                  controller: passwordController,
+                  focusNode: passWordFocus,
+                  focusnext: confirmPassWordFocus,
+                  ),
+                SizedBox(height: 10,),
+                    
+                //confirm password textfield
+                MyTextfield(
+                  hintText: "Confirm the password", 
+                  obscureText: true, 
+                  controller: confirmPassWordController,
+                  focusNode: confirmPassWordFocus,),
+                SizedBox(height: 10,),
+                    
+                //sign up button
+                MyButton(
+                  onTap: signup,
+                  text: "Sign up",
+                  color: buttoncolor,
+                  ),
+                SizedBox(height: 20,),
+                    
+                //Log in
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Already have a account?",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    SizedBox(width: 5,),
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: Text("Log in",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10,),
+              ],
+            ),
+          ),
+        );}
     );
   }
 }

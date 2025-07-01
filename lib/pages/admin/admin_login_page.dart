@@ -26,10 +26,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
 
   void submission(){
     if(focussubmission.hasFocus){
-      if(formkey.currentState!.validate()){
-        focussubmission.unfocus();
-        (){};
-      }
+      login();
     }
   }
 
@@ -45,10 +42,13 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     //authentification
 
     //home page
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context)=> const AdminHomePage(),)
-    );
+    if(formkey.currentState!.validate()){
+      focussubmission.unfocus();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context)=> const AdminHomePage(),)
+      );
+    }
   }
 
   @override
@@ -68,7 +68,6 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 );
               },
             ),
-            SizedBox(width: 2,)
           ],
         ),
       ),
@@ -146,7 +145,8 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 ),
               ),
             ],
-          )
+          ),
+          SizedBox(height: 10,),
         ],
       ),
     );

@@ -50,17 +50,7 @@ class _MyDropdownbuttonformfieldState extends State<MyDropdownbuttonformfield> {
                 onChanged: (value) {
                   setState(() {
                     widget.choice = value;
-                    if(widget.listener != null){
-                      if (value == 'waiter'){
-                        widget.listener!.value = 'assets/server.json';
-                      }
-                      if (value == 'Deliver'){
-                        widget.listener!.value = 'assets/deliver.json';
-                      }
-                      if (value == 'Kitchen manager'){
-                        widget.listener!.value = 'assets/kitchen_manager.json';
-                      }
-                    }
+                    widget.listener!.value = value!;
                   });
                 },
                 validator: (value){
