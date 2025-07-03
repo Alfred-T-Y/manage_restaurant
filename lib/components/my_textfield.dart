@@ -46,7 +46,7 @@ class MyTextfield extends StatelessWidget {
         },
         validator: (value){
           if(value!.isEmpty){
-            return 'Please enter the $champ';
+            return 'Please enter $champ';
           }
         return null;
         },

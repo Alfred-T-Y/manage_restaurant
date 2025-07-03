@@ -30,13 +30,14 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
   final focussubmission = FocusNode();
   final formkey = GlobalKey<FormState>();
   List<String> choices = ["Waiter","Kitchen manager","Deliver","Manager"];
-  final String? choice = null;
+  String? choice;
   ValueNotifier<String> choicelistener = ValueNotifier('Waiter');
-  Color buttoncolor = Colors.greenAccent;
+  Color buttoncolor = const Color.fromARGB(255, 15, 224, 123);
 
 
   void submission(){
     if(focussubmission.hasFocus){
+      focussubmission.unfocus();
       signup();
     }
   }
@@ -53,8 +54,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
     //authentification
 
     //home page
-    if(formkey.currentState!.validate() && choice != null){
-      focussubmission.unfocus();
+    if(formkey.currentState!.validate() /*&& choice != null*/){
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context)=> const WorkerHomePage(),)
@@ -114,119 +114,133 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
           ),
           backgroundColor: Theme.of(context).colorScheme.surface,
           body: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //logo
-                Lottie.asset(
-                  animationPath,
-                  width: 200,
-                  height: 200,
-                  fit: BoxFit.contain,
-                ),
-                const SizedBox(height: 25),
-            
-                //app slogan
-                Text(
-                  "Start working",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 16,
-                    color: Theme.of(context).colorScheme.inversePrimary,
+            child: Form(
+              key: formkey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //logo
+                  Lottie.asset(
+                    animationPath,
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.contain,
                   ),
-                ),
-                    
-                const SizedBox(height: 25),
-                
-                //emailtextfield
-                MyTextfield(
-                  hintText: "Email", 
-                  obscureText: false, 
-                  controller: emailController,
-                  focusNode: emailFocus,
-                  focusnext: nameFocus,
-                  ),
-                SizedBox(height: 10,),
-            
-                //name
-                MyTextfield(
-                  hintText: "Name and Firstname", 
-                  obscureText: false, 
-                  controller: nameController,
-                  focusNode: nameFocus,
-                  focusnext: idFocus,
-                  ),
-                SizedBox(height: 10,),
-                    
-                //RoleDropdownbutton 
-                MyDropdownbuttonformfield(
-                  hintText: "Role", 
-                  choice: choice, 
-                  champ: "Role",
-                  choices: choices,
-                  listener: choicelistener,),
-                SizedBox(height: 10,),
-            
-                //employer's id
-                MyTextfield(
-                  hintText: "Employer's ID", 
-                  obscureText: false, 
-                  controller: idController,
-                  focusNode: idFocus,
-                  focusnext: passWordFocus,
-                ),
-                SizedBox(height: 10,),
-                    
-                //password textfield
-                MyTextfield(
-                  hintText: "Password", 
-                  obscureText: true, 
-                  controller: passwordController,
-                  focusNode: passWordFocus,
-                  focusnext: confirmPassWordFocus,
-                  ),
-                SizedBox(height: 10,),
-                    
-                //confirm password textfield
-                MyTextfield(
-                  hintText: "Confirm the password", 
-                  obscureText: true, 
-                  controller: confirmPassWordController,
-                  focusNode: confirmPassWordFocus,),
-                SizedBox(height: 10,),
-                    
-                //sign up button
-                MyButton(
-                  onTap: signup,
-                  text: "Sign up",
-                  color: buttoncolor,
-                  ),
-                SizedBox(height: 20,),
-                    
-                //Log in
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Already have a account?",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                  const SizedBox(height: 25),
+              
+                  //app slogan
+                  Text(
+                    "Start working",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 16,
+                      color: Theme.of(context).colorScheme.inversePrimary,
                     ),
-                    SizedBox(width: 5,),
-                    GestureDetector(
-                      onTap: widget.onTap,
-                      child: Text("Log in",
+                  ),
+                      
+                  const SizedBox(height: 25),
+                  
+                  //emailtextfield
+                  MyTextfield(
+                    hintText: "Email", 
+                    obscureText: false, 
+                    controller: emailController,
+                    focusNode: emailFocus,
+                    focusnext: nameFocus,
+                    champ: "your email",
+                    ),
+                  SizedBox(height: 10,),
+              
+                  //name
+                  MyTextfield(
+                    hintText: "Name and Firstname", 
+                    obscureText: false, 
+                    controller: nameController,
+                    focusNode: nameFocus,
+                    focusnext: idFocus,
+                    champ: "your name and firstname",
+                    ),
+                  SizedBox(height: 10,),
+                      
+                  //RoleDropdownbutton 
+                  MyDropdownbuttonformfield(
+                    hintText: "Role", 
+                    choice: (value) {
+                      setState(() {
+                        choice = value;
+                      });
+                    },
+                    champ: "Role",
+                    choices: choices,
+                    listener: choicelistener,
+                    ),
+                  SizedBox(height: 10,),
+              
+                  //employer's id
+                  MyTextfield(
+                    hintText: "Employer's ID", 
+                    obscureText: false, 
+                    controller: idController,
+                    focusNode: idFocus,
+                    focusnext: passWordFocus,
+                    champ: "your employer's id",
+                  ),
+                  SizedBox(height: 10,),
+                      
+                  //password textfield
+                  MyTextfield(
+                    hintText: "Password", 
+                    obscureText: true, 
+                    controller: passwordController,
+                    focusNode: passWordFocus,
+                    focusnext: confirmPassWordFocus,
+                    champ: "your password",
+                    ),
+                  SizedBox(height: 10,),
+                      
+                  //confirm password textfield
+                  MyTextfield(
+                    hintText: "Confirm the password", 
+                    obscureText: true, 
+                    controller: confirmPassWordController,
+                    focusNode: confirmPassWordFocus,
+                    focusnext: focussubmission,
+                    champ: "your password again",),
+                  SizedBox(height: 10,),
+                      
+                  //sign up button
+                  MyButton(
+                    onTap: signup,
+                    text: "Sign up",
+                    color: buttoncolor,
+                    ),
+                  SizedBox(height: 20,),
+                      
+                  //Log in
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Already have a account?",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.inversePrimary,
-                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10,),
-              ],
+                      SizedBox(width: 5,),
+                      GestureDetector(
+                        onTap: widget.onTap,
+                        child: Text("Log in",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                ],
+              ),
             ),
           ),
         );}

@@ -32,6 +32,7 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
 
   void submission(){
     if(focussubmission.hasFocus){
+      focussubmission.unfocus();
       signup();
     }
   }
@@ -49,7 +50,6 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
 
     //home page
     if(formkey.currentState!.validate()){
-      focussubmission.unfocus();
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context)=> const AdminHomePage(),)
@@ -79,111 +79,120 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //logo
-            Lottie.asset(
-              'assets/admin.json',
-              width: 200,
-              height: 200,
-              fit: BoxFit.contain,
-            ),
-        
-            const SizedBox(height: 25),
-        
-            //app slogan
-            Text(
-              "Create a new account",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-                fontSize: 16,
-                color: Theme.of(context).colorScheme.inversePrimary,
+        child: Form(
+          key: formkey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //logo
+              Lottie.asset(
+                'assets/admin.json',
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
               ),
-            ),
-        
-            const SizedBox(height: 25),
-            
-            //emailtextfield
-            MyTextfield(
-              hintText: "Email", 
-              obscureText: false, 
-              controller: emailController,
-              focusNode: emailFocus,
-              focusnext: nameFocus,
-              ),
-            SizedBox(height: 10,),
-        
-            //Name 
-            MyTextfield(
-              hintText: "Enter your name and firstname", 
-              obscureText: false, 
-              controller: nameController,
-              focusNode: nameFocus,
-              focusnext: passWordFocus,
-            ),
-            SizedBox(height: 10,),
-        
-            //name of the restaurant
-            MyTextfield(
-              hintText: "Enter the name of your restaurant", 
-              obscureText: false, 
-              controller: nameRestaurantController,
-              focusNode: nameRestaurantFocus,
-              focusnext: passWordFocus,
-            ),
-            SizedBox(height: 10,),
-        
-            //password textfield
-            MyTextfield(
-              hintText: "Password", 
-              obscureText: true, 
-              controller: passwordController,
-              focusNode: passWordFocus,
-              focusnext: confirmPassWordFocus,
-              ),
-            SizedBox(height: 10,),
-        
-            //confirm password textfield
-            MyTextfield(
-              hintText: "Confirm the password", 
-              obscureText: true, 
-              controller: confirmPassWordController,
-              focusNode: confirmPassWordFocus,),
-            SizedBox(height: 10,),
-        
-            //sign up button
-            MyButton(
-              onTap: signup,
-              text: "Sign up",
-              color: const Color.fromARGB(255, 5, 93, 245),
-              ),
-            SizedBox(height: 20,),
-        
-            //Log in
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Already have a account?",
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+          
+              const SizedBox(height: 25),
+          
+              //app slogan
+              Text(
+                "Create a new account",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.inversePrimary,
                 ),
-                SizedBox(width: 5,),
-                GestureDetector(
-                  onTap: widget.onTap,
-                  child: Text("Log in",
+              ),
+          
+              const SizedBox(height: 25),
+              
+              //emailtextfield
+              MyTextfield(
+                hintText: "Email", 
+                obscureText: false, 
+                controller: emailController,
+                focusNode: emailFocus,
+                focusnext: nameFocus,
+                champ: "your email",
+                ),
+              SizedBox(height: 10,),
+          
+              //Name 
+              MyTextfield(
+                hintText: "Name and firstname", 
+                obscureText: false, 
+                controller: nameController,
+                focusNode: nameFocus,
+                focusnext: nameRestaurantFocus,
+                champ: 'your name and firstname',
+              ),
+              SizedBox(height: 10,),
+          
+              //name of the restaurant
+              MyTextfield(
+                hintText: "Name of your restaurant", 
+                obscureText: false, 
+                controller: nameRestaurantController,
+                focusNode: nameRestaurantFocus,
+                focusnext: passWordFocus,
+                champ: "the name of the restaurant",
+              ),
+              SizedBox(height: 10,),
+          
+              //password textfield
+              MyTextfield(
+                hintText: "Password", 
+                obscureText: true, 
+                controller: passwordController,
+                focusNode: passWordFocus,
+                focusnext: confirmPassWordFocus,
+                champ: "your password",
+                ),
+              SizedBox(height: 10,),
+          
+              //confirm password textfield
+              MyTextfield(
+                hintText: "Confirm the password", 
+                obscureText: true, 
+                controller: confirmPassWordController,
+                focusNode: confirmPassWordFocus,
+                focusnext: focussubmission,
+                champ: "your password again",),
+              SizedBox(height: 10,),
+          
+              //sign up button
+              MyButton(
+                onTap: signup,
+                text: "Sign up",
+                color: const Color.fromARGB(255, 5, 93, 245),
+                ),
+              SizedBox(height: 20,),
+          
+              //Log in
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Already have a account?",
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary,
-                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10,),
-          ],
+                  SizedBox(width: 5,),
+                  GestureDetector(
+                    onTap: widget.onTap,
+                    child: Text("Log in",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10,),
+            ],
+          ),
         ),
       ),
     );

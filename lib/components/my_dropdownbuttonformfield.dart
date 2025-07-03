@@ -4,18 +4,19 @@ import 'package:flutter/material.dart';
 class MyDropdownbuttonformfield extends StatefulWidget {
   //text when there is no choice yet 
   final String hintText;
-  String? choice;
   //for the message in case of no choice during the submission 
   final String? champ; 
   final List<String> choices;
   ValueNotifier<String>? listener;
+  final ValueChanged<String?> choice;
+
 
   MyDropdownbuttonformfield({super.key,
     required this.hintText,
-    required this.choice,
     required this.champ,
     required this.choices,
-    this.listener});
+    required this.choice,
+    this.listener,});
 
   @override
   State<MyDropdownbuttonformfield> createState() => _MyDropdownbuttonformfieldState();
@@ -41,7 +42,7 @@ class _MyDropdownbuttonformfieldState extends State<MyDropdownbuttonformfield> {
                   hintText: widget.hintText,
                   hintStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
-                value: widget.choice,
+                value: null,
                 items: widget.choices.map((role) => DropdownMenuItem(
                           value: role,
                           child: Text(role),
@@ -49,16 +50,12 @@ class _MyDropdownbuttonformfieldState extends State<MyDropdownbuttonformfield> {
                     .toList(),
                 onChanged: (value) {
                   setState(() {
-                    widget.choice = value;
+                    widget.choice(value);
                     widget.listener!.value = value!;
                   });
                 },
-                validator: (value){
-                  if(value!.isEmpty){
-                    return 'Please choose a ${widget.champ}';
-                  }
-                  return null;
-                },
+                validator: (value) =>
+                  value == null ? 'Please choose a ${widget.champ}' : null,
               ),
     );
   }
