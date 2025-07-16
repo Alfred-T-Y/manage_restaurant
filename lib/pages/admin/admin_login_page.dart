@@ -109,6 +109,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 focusNode: emailFocus,
                 focusnext: passWordFocus,
                 champ: "your email",
+                bordercolor: Color.fromARGB(255, 5, 93, 245),
                 ),
               SizedBox(height: 10,),
           
@@ -120,6 +121,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 focusNode: passWordFocus,
                 focusnext: focussubmission,
                 champ: "your password",
+                bordercolor: Color.fromARGB(255, 5, 93, 245),
                 ),
               SizedBox(height: 10,),
           

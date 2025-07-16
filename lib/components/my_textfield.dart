@@ -8,6 +8,8 @@ class MyTextfield extends StatelessWidget {
   final FocusNode? focusNode;
   final FocusNode? focusnext;
   final String? champ; 
+  final double? padding;
+  final Color? bordercolor;
 
   const MyTextfield({super.key,
   required this.hintText,
@@ -16,12 +18,14 @@ class MyTextfield extends StatelessWidget {
   this.focusNode,
   this.focusnext,
   this.champ,
+  this.padding,
+  this.bordercolor,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0, ),
+      padding: EdgeInsets.symmetric(horizontal: padding ?? 25, ),
       child: TextFormField(
         obscureText: obscureText,
         controller: controller,
@@ -34,7 +38,7 @@ class MyTextfield extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+            borderSide: BorderSide(color: bordercolor ?? Theme.of(context).colorScheme.primary),
           ),
           fillColor: Theme.of(context).colorScheme.secondary,
           filled: true,

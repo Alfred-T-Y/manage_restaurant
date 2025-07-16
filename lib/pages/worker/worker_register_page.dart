@@ -32,7 +32,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
   List<String> choices = ["Waiter","Kitchen manager","Deliver","Manager"];
   String? choice;
   ValueNotifier<String> choicelistener = ValueNotifier('Waiter');
-  Color buttoncolor = const Color.fromARGB(255, 15, 224, 123);
+  Color pagecolor = const Color.fromARGB(255, 15, 224, 123);
 
 
   void submission(){
@@ -82,19 +82,19 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
         switch(animationPath){
           case "Waiter":
             animationPath = "assets/server.json";
-            buttoncolor = const Color.fromARGB(255, 15, 224, 123);
+            pagecolor = const Color.fromARGB(255, 15, 224, 123);
             break;
           case "Kitchen manager":
             animationPath = "assets/kitchen_manager.json";
-            buttoncolor = const Color.fromARGB(255, 8, 202, 14);
+            pagecolor = const Color.fromARGB(255, 8, 202, 14);
             break;
           case "Deliver":
             animationPath = "assets/deliver.json";
-            buttoncolor = const Color.fromARGB(255, 25, 1, 112);
+            pagecolor = const Color.fromARGB(255, 25, 1, 112);
             break;
           case "Manager":
             animationPath = "assets/manager.json";
-            buttoncolor = const Color.fromARGB(255, 146, 144, 23);
+            pagecolor = const Color.fromARGB(255, 146, 144, 23);
             break;
         }
         return Scaffold(
@@ -149,6 +149,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
                     focusNode: emailFocus,
                     focusnext: nameFocus,
                     champ: "your email",
+                    bordercolor: pagecolor,
                     ),
                   SizedBox(height: 10,),
               
@@ -160,6 +161,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
                     focusNode: nameFocus,
                     focusnext: idFocus,
                     champ: "your name and firstname",
+                    bordercolor: pagecolor,
                     ),
                   SizedBox(height: 10,),
                       
@@ -185,6 +187,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
                     focusNode: idFocus,
                     focusnext: passWordFocus,
                     champ: "your employer's id",
+                    bordercolor: pagecolor,
                   ),
                   SizedBox(height: 10,),
                       
@@ -196,6 +199,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
                     focusNode: passWordFocus,
                     focusnext: confirmPassWordFocus,
                     champ: "your password",
+                    bordercolor: pagecolor,
                     ),
                   SizedBox(height: 10,),
                       
@@ -206,14 +210,16 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
                     controller: confirmPassWordController,
                     focusNode: confirmPassWordFocus,
                     focusnext: focussubmission,
-                    champ: "your password again",),
+                    champ: "your password again",
+                    bordercolor: pagecolor,
+                    ),
                   SizedBox(height: 10,),
                       
                   //sign up button
                   MyButton(
                     onTap: signup,
                     text: "Sign up",
-                    color: buttoncolor,
+                    color: pagecolor,
                     ),
                   SizedBox(height: 20,),
                       

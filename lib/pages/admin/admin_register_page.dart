@@ -115,6 +115,7 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
                 focusNode: emailFocus,
                 focusnext: nameFocus,
                 champ: "your email",
+                bordercolor: Color.fromARGB(255, 5, 93, 245),
                 ),
               SizedBox(height: 10,),
           
@@ -126,6 +127,7 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
                 focusNode: nameFocus,
                 focusnext: nameRestaurantFocus,
                 champ: 'your name and firstname',
+                bordercolor: Color.fromARGB(255, 5, 93, 245),
               ),
               SizedBox(height: 10,),
           
@@ -137,6 +139,7 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
                 focusNode: nameRestaurantFocus,
                 focusnext: passWordFocus,
                 champ: "the name of the restaurant",
+                bordercolor: Color.fromARGB(255, 5, 93, 245),
               ),
               SizedBox(height: 10,),
           
@@ -148,6 +151,7 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
                 focusNode: passWordFocus,
                 focusnext: confirmPassWordFocus,
                 champ: "your password",
+                bordercolor: Color.fromARGB(255, 5, 93, 245),
                 ),
               SizedBox(height: 10,),
           
@@ -158,7 +162,9 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
                 controller: confirmPassWordController,
                 focusNode: confirmPassWordFocus,
                 focusnext: focussubmission,
-                champ: "your password again",),
+                champ: "your password again",
+                bordercolor: Color.fromARGB(255, 5, 93, 245),
+                ),
               SizedBox(height: 10,),
           
               //sign up button
