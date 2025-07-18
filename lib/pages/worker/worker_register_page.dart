@@ -179,15 +179,35 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
                     ),
                   SizedBox(height: 10,),
               
-                  //employer's id
-                  MyTextfield(
-                    hintText: "Employer's ID", 
-                    obscureText: false, 
-                    controller: idController,
-                    focusNode: idFocus,
-                    focusnext: passWordFocus,
-                    champ: "your employer's id",
-                    bordercolor: pagecolor,
+                  //employer's idr
+                  Row(
+                    children: [
+                      SizedBox(width: 25,),
+                      Expanded(
+                        child: MyTextfield(
+                          hintText: "Employer's ID", 
+                          obscureText: false, 
+                          controller: idController,
+                          focusNode: idFocus,
+                          focusnext: passWordFocus,
+                          champ: "your employer's id",
+                          bordercolor: pagecolor,
+                          padding: 0,
+                        ),
+                      ),
+                      SizedBox(width: 5,),
+                      GestureDetector(
+                        child: Icon(
+                          FontAwesomeIcons.camera,
+                          color: Theme.of(context).colorScheme.primary,
+                          size: 42,
+                          ),
+                        onTap: () {
+                          
+                        },
+                      ),
+                      SizedBox(width: 25,)
+                    ],
                   ),
                   SizedBox(height: 10,),
                       
