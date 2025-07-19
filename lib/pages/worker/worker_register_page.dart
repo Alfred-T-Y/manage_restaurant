@@ -4,7 +4,6 @@ import 'package:lottie/lottie.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 import 'package:manage_restaurant/components/my_dropdownbuttonformfield.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
-import 'package:manage_restaurant/pages/worker/worker_home_page.dart';
 
 class WorkerRegisterPage extends StatefulWidget {
 
@@ -55,9 +54,9 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
 
     //home page
     if(formkey.currentState!.validate() /*&& choice != null*/){
-      Navigator.push(
+      Navigator.pushNamed(
         context,
-        MaterialPageRoute(builder: (context)=> const WorkerHomePage(),)
+        '/WorkerHomePage'
       );
     }
   }
@@ -198,13 +197,20 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
                       SizedBox(width: 5,),
                       GestureDetector(
                         child: Icon(
-                          FontAwesomeIcons.camera,
+                          FontAwesomeIcons.qrcode,
                           color: Theme.of(context).colorScheme.primary,
                           size: 42,
                           ),
                         onTap: () {
-                          
-                        },
+                          Navigator.pushNamed(
+                            context, 
+                            'ScanQrCodePage').then((result) {
+                            if (result != null) {
+                              setState(() {
+                                idController.text = result.toString();
+                              });
+                            }
+                            });},
                       ),
                       SizedBox(width: 25,)
                     ],

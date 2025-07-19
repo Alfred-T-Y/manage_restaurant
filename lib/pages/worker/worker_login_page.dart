@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
-import 'package:manage_restaurant/pages/worker/worker_home_page.dart';
 import 'package:lottie/lottie.dart';
 
 class WorkerLoginPage extends StatefulWidget {
@@ -43,9 +42,9 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
     //home page
     if(formkey.currentState!.validate()){
       focussubmission.unfocus();
-      Navigator.push(
+      Navigator.pushNamed(
         context,
-        MaterialPageRoute(builder: (context)=> const WorkerHomePage(),)
+        '/WorkerHomePage'
       );
     }
   }

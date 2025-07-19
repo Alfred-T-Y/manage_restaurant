@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manage_restaurant/auth/worker_login_or_register.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
-import 'package:manage_restaurant/pages/admin/admin_home_page.dart';
 import 'package:lottie/lottie.dart';
 
 class AdminRegisterPage extends StatefulWidget {
@@ -50,9 +49,9 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
 
     //home page
     if(formkey.currentState!.validate()){
-      Navigator.push(
+      Navigator.pushNamed(
         context,
-        MaterialPageRoute(builder: (context)=> const AdminHomePage(),)
+        '/AdminHomePage',
       );
     }
   }
@@ -68,10 +67,10 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
               icon: FaIcon(FontAwesomeIcons.users),
               color: Theme.of(context).colorScheme.inversePrimary,
               onPressed: () {
-                Navigator.push(
+                Navigator.pushNamed(
                   context,
-                  MaterialPageRoute(builder: (context)=> const WorkerLoginOrRegister())
-                );
+                  '/WorkerLoginOrRegister'
+                );    
               },
             ),
           ],
