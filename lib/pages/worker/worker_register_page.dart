@@ -54,9 +54,10 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
 
     //home page
     if(formkey.currentState!.validate() /*&& choice != null*/){
-      Navigator.pushNamed(
+      Navigator.pushNamedAndRemoveUntil(
         context,
-        '/WorkerHomePage'
+        '/WorkerHomePage',
+        (route)=> false
       );
     }
   }
@@ -204,7 +205,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
                         onTap: () {
                           Navigator.pushNamed(
                             context, 
-                            'ScanQrCodePage').then((result) {
+                            '/ScanQrCodePage').then((result) {
                             if (result != null) {
                               setState(() {
                                 idController.text = result.toString();

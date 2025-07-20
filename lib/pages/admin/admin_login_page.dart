@@ -42,9 +42,10 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     //home page
     if(formkey.currentState!.validate()){
       focussubmission.unfocus();
-      Navigator.pushNamed(
+      Navigator.pushNamedAndRemoveUntil(
         context,
         '/AdminHomePage',
+        (route)=> false
       );
     }
   }

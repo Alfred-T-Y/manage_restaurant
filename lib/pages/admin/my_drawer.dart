@@ -26,7 +26,7 @@ class MyDrawer extends StatelessWidget {
           SizedBox(height: 30,),
 
           MyDrawerTile(
-            text: "                     Home", 
+            text: "Home", 
             icon: FontAwesomeIcons.house, 
             onTap: (){
               Navigator.pop(context);
@@ -35,7 +35,17 @@ class MyDrawer extends StatelessWidget {
           SizedBox(height: 10,),
 
           MyDrawerTile(
-            text: "                     Settings", 
+            text: "QR code", 
+            icon: FontAwesomeIcons.qrcode, 
+            onTap:(){
+              Navigator.pushNamed(
+                context, 
+                '/GenerateQrCodePage');
+            } ),
+          SizedBox(height: 10,),
+
+          MyDrawerTile(
+            text: "Settings", 
             icon: FontAwesomeIcons.gear, 
             onTap: (){
               Navigator.pop(context);
@@ -52,9 +62,15 @@ class MyDrawer extends StatelessWidget {
           const Spacer(),
 
           MyDrawerTile(
-            text: "                     Log out", 
+            text: "Log out", 
             icon: FontAwesomeIcons.rightFromBracket, 
-            onTap: (){}
+            onTap: (){
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/', 
+                (route)=> false
+              );
+            }
           ),
           SizedBox(height: 10,),
         ],

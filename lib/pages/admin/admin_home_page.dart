@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:manage_restaurant/components/my_drawer.dart';
+import 'package:manage_restaurant/pages/admin/my_drawer.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});

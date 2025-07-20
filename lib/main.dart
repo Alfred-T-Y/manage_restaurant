@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:manage_restaurant/auth/admin_login_or_register.dart';
 import 'package:manage_restaurant/auth/worker_login_or_register.dart';
+import 'package:manage_restaurant/components/generate_qr_code_page.dart';
 import 'package:manage_restaurant/components/scan_qr_code_page.dart';
 import 'package:manage_restaurant/pages/admin/admin_home_page.dart';
 import 'package:manage_restaurant/pages/worker/worker_home_page.dart';
@@ -42,8 +43,10 @@ class Routegenerator {
         return  MaterialPageRoute(builder: (context)=> const AdminHomePage());
       case '/WorkerHomePage':
         return MaterialPageRoute(builder: (context)=> const WorkerHomePage());
-      case 'ScanQrCodePage':
-        return MaterialPageRoute(builder: (context)=> const  ScanQrCodePage());
+      case '/ScanQrCodePage':
+        return MaterialPageRoute(builder: (context)=> const ScanQrCodePage());
+      case '/GenerateQrCodePage':
+        return MaterialPageRoute(builder: (cantext)=> const GenerateQrCodePage());
 
       default:
         return MaterialPageRoute(

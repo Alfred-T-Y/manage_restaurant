@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:manage_restaurant/auth/worker_login_or_register.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
 import 'package:lottie/lottie.dart';
@@ -49,9 +48,10 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
 
     //home page
     if(formkey.currentState!.validate()){
-      Navigator.pushNamed(
+      Navigator.pushNamedAndRemoveUntil(
         context,
         '/AdminHomePage',
+        (route)=> false
       );
     }
   }

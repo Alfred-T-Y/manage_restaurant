@@ -42,9 +42,10 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
     //home page
     if(formkey.currentState!.validate()){
       focussubmission.unfocus();
-      Navigator.pushNamed(
+      Navigator.pushNamedAndRemoveUntil(
         context,
-        '/WorkerHomePage'
+        '/WorkerHomePage',
+        (route)=> false
       );
     }
   }
