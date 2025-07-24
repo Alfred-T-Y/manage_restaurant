@@ -44,7 +44,10 @@ class Routegenerator {
       case '/WorkerHomePage':
         return MaterialPageRoute(builder: (context)=> const WorkerHomePage());
       case '/ScanQrCodePage':
-        return MaterialPageRoute(builder: (context)=> const ScanQrCodePage());
+        final color = settings.arguments as Color;
+        return MaterialPageRoute(builder: (context) => ScanQrCodePage(
+          color: color,
+        ),);
       case '/GenerateQrCodePage':
         return MaterialPageRoute(builder: (cantext)=> const GenerateQrCodePage());
 

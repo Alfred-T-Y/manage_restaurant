@@ -96,6 +96,9 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
             animationPath = "assets/manager.json";
             pagecolor = const Color.fromARGB(255, 146, 144, 23);
             break;
+          default:
+            animationPath = "assets/server.json";
+            pagecolor = const Color.fromARGB(255, 15, 224, 123);
         }
         return Scaffold(
           appBar: AppBar(
@@ -205,7 +208,9 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
                         onTap: () {
                           Navigator.pushNamed(
                             context, 
-                            '/ScanQrCodePage').then((result) {
+                            '/ScanQrCodePage',
+                            arguments: pagecolor,
+                            ).then((result) {
                             if (result != null) {
                               setState(() {
                                 idController.text = result.toString();

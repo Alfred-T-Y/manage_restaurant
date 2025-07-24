@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class ScanQrCodePage extends StatefulWidget {
+  final Color color;
 
-  const ScanQrCodePage({super.key,});
+  const ScanQrCodePage({super.key,
+  required this.color});
 
   @override
   State<ScanQrCodePage> createState() => _ScanQrCodePageState();
@@ -18,6 +20,7 @@ class _ScanQrCodePageState extends State<ScanQrCodePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -37,12 +40,12 @@ class _ScanQrCodePageState extends State<ScanQrCodePage> {
           ],
         ),
       ),
-      body: InteractiveViewer(
-        maxScale: 8.0,
-        minScale: 1.0,
-        child: Stack(
-          children:[ 
-            MobileScanner(
+      body: Stack(
+        children:[ 
+          InteractiveViewer(
+            maxScale: 8,
+            minScale: 1,
+            child: MobileScanner(
               controller: qrController,
               onDetect: (capture){
                 final List<Barcode> barcodes = capture.barcodes;
@@ -50,16 +53,16 @@ class _ScanQrCodePageState extends State<ScanQrCodePage> {
                 Navigator.pop(context, barcode);
               },
             ),
-            IgnorePointer(
-              child: Center(
-                child: CustomPaint(
-                  size: const Size(250, 250), // Taille de ton cadre
-                  painter: ScannerFramePainter(),
-                      )
-              ),
-            )
-          ]
-        ),
+          ),
+          IgnorePointer(
+            child: Center(
+              child: CustomPaint(
+                size: const Size(250, 250), // Taille de ton cadre
+                painter: ScannerFramePainter(widget.color),
+                    )
+            ),
+          )
+        ]
       ),
 
     );
@@ -68,45 +71,89 @@ class _ScanQrCodePageState extends State<ScanQrCodePage> {
 
 
 class ScannerFramePainter extends CustomPainter {
+  final Color color;
+
+  ScannerFramePainter(this.color); 
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.transparent
-      ..strokeWidth = 4
-      ..style = PaintingStyle.stroke;
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4;
 
-    const radius = 16.0;
-    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
-    final rrect = RRect.fromRectAndRadius(rect, Radius.circular(radius));
+    final radius = 11.0;
 
-    canvas.drawRRect(rrect, paint);
+    //top-left  
+    var path = Path()
+      ..moveTo(12, 0)
+      ..arcToPoint(
+        Offset(0, 12), // Point final de l’arc
+        radius: Radius.circular(radius),
+        clockwise: false,
+      );
+
+    canvas.drawPath(path, paint);
+
+    //top-right
+    path = Path()
+      ..moveTo(size.width - 10, 0)
+      ..arcToPoint(
+        Offset(size.width, 10), // Point final de l’arc
+        radius: Radius.circular(radius),
+        clockwise: true,
+      );
+
+    canvas.drawPath(path, paint);
+
+    //bottom-left
+    path = Path()
+      ..moveTo(0, size.height - 10)
+      ..arcToPoint(
+        Offset(10, size.height), // Point final de l’arc
+        radius: Radius.circular(radius),
+        clockwise: false,
+      );
+
+    canvas.drawPath(path, paint);
+
+    //bottom-right
+    path = Path()
+      ..moveTo(size.width , size.height - 10)
+      ..arcToPoint(
+        Offset(size.width - 10, size.height), // Point final de l’arc
+        radius: Radius.circular(radius),
+        clockwise: true,
+      );
+
+    canvas.drawPath(path, paint);
 
     // Optional: draw corner lines (style)
-    final cornerLength = 20.0;
+    final cornerLength = 60.0;
     final cornerPaint = Paint()
-      ..color = Colors.greenAccent
+      ..color = color
       ..strokeWidth = 4;
 
     // Top-left
-    canvas.drawLine(Offset(0, 0), Offset(cornerLength, 0), cornerPaint);
-    canvas.drawLine(Offset(0, 0), Offset(0, cornerLength), cornerPaint);
+    canvas.drawLine(Offset(10, 0), Offset(cornerLength, 0), cornerPaint);
+    canvas.drawLine(Offset(0, 10), Offset(0, cornerLength), cornerPaint);
 
     // Top-right
-    canvas.drawLine(Offset(size.width, 0),
-        Offset(size.width - cornerLength, 0), cornerPaint);
-    canvas.drawLine(Offset(size.width, 0),
+    canvas.drawLine(Offset(size.width - 10, 0),
+        Offset(size.width - cornerLength , 0), cornerPaint);
+    canvas.drawLine(Offset(size.width, 10),
         Offset(size.width, cornerLength), cornerPaint);
 
     // Bottom-left
-    canvas.drawLine(Offset(0, size.height),
+    canvas.drawLine(Offset(0, size.height - 10),
         Offset(0, size.height - cornerLength), cornerPaint);
-    canvas.drawLine(Offset(0, size.height),
+    canvas.drawLine(Offset(10, size.height),
         Offset(cornerLength, size.height), cornerPaint);
 
     // Bottom-right
-    canvas.drawLine(Offset(size.width, size.height),
+    canvas.drawLine(Offset(size.width , size.height - 10),
         Offset(size.width, size.height - cornerLength), cornerPaint);
-    canvas.drawLine(Offset(size.width, size.height),
+    canvas.drawLine(Offset(size.width - 10, size.height),
         Offset(size.width - cornerLength, size.height), cornerPaint);
   }
 
