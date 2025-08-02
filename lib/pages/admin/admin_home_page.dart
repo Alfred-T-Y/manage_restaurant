@@ -37,7 +37,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   icon: FontAwesomeIcons.user, 
                   colorstart: Colors.green, 
                   colorend: Colors.greenAccent, 
-                  onPressed: (){}),
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/PersonnelsPage');
+                  },
+                ),
                 SizedBox(width: 25,),
                 AdminHomePageOption(
                   icon: FontAwesomeIcons.basketShopping, 

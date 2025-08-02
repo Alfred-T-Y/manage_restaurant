@@ -30,7 +30,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
   final formkey = GlobalKey<FormState>();
   List<String> choices = ["Waiter","Kitchen manager","Deliver","Manager"];
   String? choice;
-  ValueNotifier<String> choicelistener = ValueNotifier('Waiter');
+  String? animationPath;
   Color pagecolor = const Color.fromARGB(255, 15, 224, 123);
   String? code = "+237";
   final phonenumberController = TextEditingController();
@@ -64,25 +64,13 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
       );
     }
   }
-  /*String lottie(){
-    if (choice == null || choice == 'waiter'){
-      return 'assets/server.json';
-    }
-    if (choice == 'Deliver'){
-      return 'assets/deliver.json';
-    }
-    if (choice == 'Kitchen manager'){
-      return 'assets/kitchen_manager.json';
-    }
-    return 'assets/server.json';
-  }*/
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<String>(
-      valueListenable: choicelistener,
-      builder:(context, animationPath, child) {
-        switch(animationPath){
+    void onChanged(String? role){
+      setState(() {
+        choice = role;
+        switch(role){
           case "Waiter":
             animationPath = "assets/server.json";
             pagecolor = const Color.fromARGB(255, 15, 224, 123);
@@ -103,225 +91,221 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
             animationPath = "assets/server.json";
             pagecolor = const Color.fromARGB(255, 15, 224, 123);
         }
-        return Scaffold(
-          appBar: AppBar(
-            title:Row(
-              children: [
-                Spacer(),
-                IconButton(
-                  icon: FaIcon(FontAwesomeIcons.userShield),
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          ),
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          body: SingleChildScrollView(
-            child: Form(
-              key: formkey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //logo
-                  Lottie.asset(
-                    animationPath,
-                    width: 200,
-                    height: 200,
-                    fit: BoxFit.contain,
-                  ),
-                  const SizedBox(height: 25),
-              
-                  //app slogan
-                  Text(
-                    "Start working",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 16,
-                      color: Theme.of(context).colorScheme.inversePrimary,
-                    ),
-                  ),
-                      
-                  const SizedBox(height: 25),
-                  
-                  //emailtextfield
-                  MyTextfield(
-                    hintText: "Email", 
-                    obscureText: false, 
-                    controller: emailController,
-                    focusNode: emailFocus,
-                    focusnext: nameFocus,
-                    champ: "your email",
-                    bordercolor: pagecolor,
-                    ),
-                  SizedBox(height: 10,),
-              
-                  //name
-                  MyTextfield(
-                    hintText: "Name and Firstname", 
-                    obscureText: false, 
-                    controller: nameController,
-                    focusNode: nameFocus,
-                    focusnext: phonenumberFocus,
-                    champ: "your name and firstname",
-                    bordercolor: pagecolor,
-                    ),
-                  SizedBox(height: 10,),
+      });
+    }
 
-                  //phone number
-                  Row(
-                    children: [
-                      SizedBox(width: 25,),
-                      SizedBox(
-                        width: 130,
-                        child: MyDropdownbuttonformfield(
-                          choices: countryPhoneCodes, 
-                          choice: (value) {
-                            setState(() {
-                              code = value!.substring(value.indexOf('+'));
-                            });
-                          },
-                          valueStart: '🇨🇲 +237',
-                          radius: 0,
-                          padding: 0),
-                      ),
+    return Scaffold(
+      appBar: AppBar(
+        title:Row(
+          children: [
+            Spacer(),
+            IconButton(
+              icon: FaIcon(FontAwesomeIcons.userShield),
+              color: Theme.of(context).colorScheme.inversePrimary,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: SingleChildScrollView(
+        child: Form(
+          key: formkey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //logo
+              Lottie.asset(
+                animationPath ?? "assets/server.json",
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(height: 25),
+          
+              //app slogan
+              Text(
+                "Start working",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+              ),
                   
-                      SizedBox(width: 10,),
-                  
-                      Expanded(
-                        child: MyTextfield(
-                          hintText: "Phonenumber", 
-                          obscureText: false, 
-                          controller: phonenumberController,
-                          focusNode: phonenumberFocus,
-                          focusnext: idFocus,
-                          bordercolor: pagecolor,
-                          padding: 0,
-                        ),
-                      ),
-                      SizedBox(width: 25,)
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-                      
-                  //RoleDropdownbutton 
-                  MyDropdownbuttonformfield(
-                    hintText: "Role", 
-                    choice: (value) {
-                      setState(() {
-                        choice = value;
-                      });
-                    },
-                    champ: "Role",
-                    choices: choices,
-                    listener: choicelistener,
-                    ),
-                  SizedBox(height: 10,),
+              const SizedBox(height: 25),
               
-                  //employer's id
-                  Row(
-                    children: [
-                      SizedBox(width: 25,),
-                      Expanded(
-                        child: MyTextfield(
-                          hintText: "Employer's ID", 
-                          obscureText: false, 
-                          controller: idController,
-                          focusNode: idFocus,
-                          focusnext: passWordFocus,
-                          champ: "your employer's id",
-                          bordercolor: pagecolor,
-                          padding: 0,
-                        ),
-                      ),
-                      SizedBox(width: 5,),
-                      GestureDetector(
-                        child: Icon(
-                          FontAwesomeIcons.qrcode,
-                          color: Theme.of(context).colorScheme.primary,
-                          size: 42,
-                          ),
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context, 
-                            '/ScanQrCodePage',
-                            arguments: pagecolor,
-                            ).then((result) {
-                            if (result != null) {
-                              setState(() {
-                                idController.text = result.toString();
-                              });
-                            }
-                            });},
-                      ),
-                      SizedBox(width: 25,)
-                    ],
+              //emailtextfield
+              MyTextfield(
+                hintText: "Email", 
+                obscureText: false, 
+                controller: emailController,
+                focusNode: emailFocus,
+                focusnext: nameFocus,
+                champ: "your email",
+                bordercolor: pagecolor,
+                ),
+              SizedBox(height: 10,),
+          
+              //name
+              MyTextfield(
+                hintText: "Name and Firstname", 
+                obscureText: false, 
+                controller: nameController,
+                focusNode: nameFocus,
+                focusnext: phonenumberFocus,
+                champ: "your name and firstname",
+                bordercolor: pagecolor,
+                ),
+              SizedBox(height: 10,),
+
+              //phone number
+              Row(
+                children: [
+                  SizedBox(width: 25,),
+                  SizedBox(
+                    width: 130,
+                    child: MyDropdownbuttonformfield(
+                      choices: countryPhoneCodes, 
+                      valueStart: '🇨🇲 +237',
+                      radius: 0,
+                      padding: 0,
+                      onChanged: (value)=> setState(() {
+                        code = value;
+                      }),),
                   ),
-                  SizedBox(height: 10,),
-                      
-                  //password textfield
-                  MyTextfield(
-                    hintText: "Password", 
-                    obscureText: true, 
-                    controller: passwordController,
-                    focusNode: passWordFocus,
-                    focusnext: confirmPassWordFocus,
-                    champ: "your password",
-                    bordercolor: pagecolor,
+              
+                  SizedBox(width: 10,),
+              
+                  Expanded(
+                    child: MyTextfield(
+                      hintText: "Phonenumber", 
+                      obscureText: false, 
+                      controller: phonenumberController,
+                      focusNode: phonenumberFocus,
+                      focusnext: idFocus,
+                      bordercolor: pagecolor,
+                      padding: 0,
                     ),
-                  SizedBox(height: 10,),
-                      
-                  //confirm password textfield
-                  MyTextfield(
-                    hintText: "Confirm the password", 
-                    obscureText: true, 
-                    controller: confirmPassWordController,
-                    focusNode: confirmPassWordFocus,
-                    focusnext: focussubmission,
-                    champ: "your password again",
-                    bordercolor: pagecolor,
-                    ),
-                  SizedBox(height: 10,),
-                      
-                  //sign up button
-                  MyButton(
-                    onTap: signup,
-                    text: "Sign up",
-                    color: pagecolor,
-                    ),
-                  SizedBox(height: 20,),
-                      
-                  //Log in
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Already have a account?",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                      SizedBox(width: 5,),
-                      GestureDetector(
-                        onTap: widget.onTap,
-                        child: Text("Log in",
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(width: 25,)
                 ],
               ),
-            ),
+              SizedBox(height: 10,),
+                  
+              //RoleDropdownbutton 
+              MyDropdownbuttonformfield(
+                hintText: "Role", 
+                champ: "Role",
+                choices: choices,
+                onChanged: onChanged,
+                ),
+              SizedBox(height: 10,),
+          
+              //employer's id
+              Row(
+                children: [
+                  SizedBox(width: 25,),
+                  Expanded(
+                    child: MyTextfield(
+                      hintText: "Employer's ID", 
+                      obscureText: false, 
+                      controller: idController,
+                      focusNode: idFocus,
+                      focusnext: passWordFocus,
+                      champ: "your employer's id",
+                      bordercolor: pagecolor,
+                      padding: 0,
+                    ),
+                  ),
+                  SizedBox(width: 5,),
+                  GestureDetector(
+                    child: Icon(
+                      FontAwesomeIcons.qrcode,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 42,
+                      ),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context, 
+                        '/ScanQrCodePage',
+                        arguments: pagecolor,
+                        ).then((result) {
+                        if (result != null) {
+                          setState(() {
+                            idController.text = result.toString();
+                          });
+                        }
+                        });},
+                  ),
+                  SizedBox(width: 25,)
+                ],
+              ),
+              SizedBox(height: 10,),
+                  
+              //password textfield
+              MyTextfield(
+                hintText: "Password", 
+                obscureText: true, 
+                controller: passwordController,
+                focusNode: passWordFocus,
+                focusnext: confirmPassWordFocus,
+                champ: "your password",
+                bordercolor: pagecolor,
+                ),
+              SizedBox(height: 10,),
+                  
+              //confirm password textfield
+              MyTextfield(
+                hintText: "Confirm the password", 
+                obscureText: true, 
+                controller: confirmPassWordController,
+                focusNode: confirmPassWordFocus,
+                focusnext: focussubmission,
+                champ: "your password again",
+                bordercolor: pagecolor,
+                ),
+              SizedBox(height: 10,),
+                  
+              //sign up button
+              MyButton(
+                onTap: signup,
+                text: "Sign up",
+                color: pagecolor,
+                ),
+              SizedBox(height: 20,),
+                  
+              //Log in
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Already have a account?",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  SizedBox(width: 5,),
+                  GestureDetector(
+                    onTap: widget.onTap,
+                    child: Text("Log in",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10,),
+            ],
           ),
-        );}
-    );
+        ),
+      ),
+    );}
+
   }
   final List<String> countryPhoneCodes = [
     '🇦🇫 +93', // Afghanistan
@@ -535,5 +519,3 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
     '🇿🇲 +260', // Zambia
     '🇿🇼 +263', // Zimbabwe
   ];
-
-}

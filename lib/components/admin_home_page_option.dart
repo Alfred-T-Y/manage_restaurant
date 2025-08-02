@@ -5,7 +5,7 @@ class AdminHomePageOption extends StatelessWidget {
   final IconData icon;
   final Color colorstart;
   final Color colorend;
-  final Function onPressed;
+  final Function() onPressed;
 
   const AdminHomePageOption({super.key,
     required this.icon,
@@ -25,7 +25,7 @@ class AdminHomePageOption extends StatelessWidget {
             child: IconButton(
               icon: Icon(icon,
                     size: 50,),
-              onPressed: onPressed(),),
+              onPressed: onPressed ),
           ),
         ),
         CustomPaint(

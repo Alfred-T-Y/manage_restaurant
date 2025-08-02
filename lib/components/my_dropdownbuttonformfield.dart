@@ -7,22 +7,20 @@ class MyDropdownbuttonformfield extends StatefulWidget {
   //for the message in case of no choice during the submission 
   final String? champ; 
   final List<String> choices;
-  ValueNotifier<String>? listener;
-  final ValueChanged<String?> choice;
   final String? valueStart;
   final double? radius;
   final double? padding;
+  final Function(String?)? onChanged;
 
 
-  MyDropdownbuttonformfield({super.key,
+  const MyDropdownbuttonformfield({super.key,
     this.hintText,
     this.champ,
     required this.choices,
-    required this.choice,
-    this.listener,
     this.valueStart,
     this.radius,
-    this.padding});
+    this.padding,
+    required this.onChanged});
 
   @override
   State<MyDropdownbuttonformfield> createState() => _MyDropdownbuttonformfieldState();
@@ -54,12 +52,7 @@ class _MyDropdownbuttonformfieldState extends State<MyDropdownbuttonformfield> {
                           child: Text(role),
                         ))
                     .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    widget.choice(value);
-                    widget.listener!.value = value!;
-                  });
-                },
+                onChanged: widget.onChanged,
                 validator: (value) =>
                   value == null ? 'Please choose a ${widget.champ}' : null,
               ),
