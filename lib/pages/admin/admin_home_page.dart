@@ -29,7 +29,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 25,),
+            SizedBox(height: 50,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

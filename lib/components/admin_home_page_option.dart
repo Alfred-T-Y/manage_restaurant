@@ -19,19 +19,23 @@ class AdminHomePageOption extends StatelessWidget {
     return Stack(
       children: [
         SizedBox(
-          width: 200,
-          height: 200,
+          width: 130,
+          height: 130,
           child: Center(
             child: IconButton(
               icon: Icon(icon,
-                    size: 50,),
+                    size: 50,
+                    color: Theme.of(context).colorScheme.primary,
+                ),
               onPressed: onPressed ),
           ),
         ),
-        CustomPaint(
-          size: Size(200, 200),
-          painter: RoundedRectanglePainter(
-            colorstart, colorend),
+        IgnorePointer(
+          child: CustomPaint(
+            size: Size(130, 130),
+            painter: RoundedRectanglePainter(
+              colorstart, colorend),
+          ),
         ),
       ],
     );

@@ -8,6 +8,8 @@ class MyButton extends StatelessWidget {
   final double? height;
   final double? padding;
   final double? margin;
+  final double? textsize;
+  final double? raduis;
 
   const MyButton({
     super.key, 
@@ -17,7 +19,9 @@ class MyButton extends StatelessWidget {
     this.width,
     this.height,
     this.padding,
-    this.margin
+    this.margin,
+    this.textsize,
+    this.raduis
   });
 
   @override
@@ -27,7 +31,7 @@ class MyButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(raduis ?? 20),
         ),
         padding: EdgeInsets.all(padding ?? 25),
         margin: EdgeInsets.symmetric(horizontal: margin ?? 25),
@@ -39,7 +43,7 @@ class MyButton extends StatelessWidget {
             style : TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.grey.shade100,
-              fontSize: 16,
+              fontSize: textsize ?? 16,
             ),
             ),),
       ),

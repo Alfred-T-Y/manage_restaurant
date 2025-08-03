@@ -7,15 +7,24 @@ class PersonnelsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Personnels",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+            fontSize: 20,
+            color: Theme.of(context).colorScheme.inversePrimary,
+          ),
+        ),
+      ),
       body: ListView.builder(
         itemCount: personnels.length,
         itemBuilder: (context, index){
-          return Expanded(
-            child: PersonnelItem(
-              name: personnels[index]['name'],
-              role: personnels[index]['role'],
-              ),
-          );
+          return PersonnelItem(
+            name: personnels[index]['name'],
+            role: personnels[index]['role'],
+            );
         },
 
       )
@@ -41,7 +50,7 @@ class PersonnelsPage extends StatelessWidget {
     {
       'name':'al',
       'email':'toto@gmail.com',
-      'role':'Manager'  
+      'role':'Waiter'  
     },
     {
       'name':'el',
@@ -65,56 +74,73 @@ class PersonnelItem extends StatelessWidget {
     Color color;
     switch(role){
           case "Waiter":
-            color = const Color.fromARGB(255, 15, 224, 123);
+            color = Colors.red.shade200;
             break;
           case "Kitchen manager":
-            color = const Color.fromARGB(255, 8, 202, 14);
+            color = Colors.green.shade100;
             break;
           case "Deliver":
-            color = const Color.fromARGB(255, 25, 1, 112);
+            color = Colors.blue.shade200;
             break;
           case "Manager":
-            color = const Color.fromARGB(255, 146, 144, 23);
+            color = Colors.yellow.shade200;
             break;
           default:
             color = const Color.fromARGB(255, 15, 224, 123);
         }
-    return Stack(
-      children:[ 
-        Card(
-          margin: EdgeInsets.all(8),
-          elevation: 3,
-          child: Row(
-            children: [
-              Text(
-                name,
-                style: TextStyle(fontSize: 10),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Stack(
+            children:[ 
+              SizedBox(
+                width: 700,
+                height: 70,
+                child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 10,),
+                    Text(
+                      name,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Spacer(),
+                    MyButton(
+                      text: 'Info', 
+                      onTap: (){}, 
+                      color: Colors.blue.shade900,
+                      padding: 0,
+                      margin: 2,
+                      width: 60,
+                      height: 30,
+                      textsize: 13,
+                      raduis: 5,),
+                    SizedBox(width: 5,),
+                    MyButton(
+                      text: 'Modifier', 
+                      onTap: (){}, 
+                      color: Colors.red.shade800,
+                      padding: 0,
+                      margin: 2,
+                      width: 60,
+                      height: 30,
+                      textsize: 13,
+                      raduis: 5,),
+                    SizedBox(width: 5,),
+                  ],
+                ),
               ),
-              Spacer(),
-              MyButton(
-                text: 'Info', 
-                onTap: (){}, 
-                color: Colors.blue.shade900,
-                padding: 0,
-                margin: 2,
-                width: 60,
-                height: 30,),
-              SizedBox(width: 5,),
-              MyButton(
-                text: 'Modifier', 
-                onTap: (){}, 
-                color: Colors.red.shade800,
-                padding: 0,
-                margin: 2,
-                width: 60,
-                height: 30,)
-            ],
+              IgnorePointer(
+                child: CustomPaint(
+                  size: Size(700, 70),
+                  painter: RoundedRectanglePainter(color, color),
+                ),
+              )
+            ]
           ),
-        ),
-        CustomPaint(
-          painter: RoundedRectanglePainter(color, color),
-        )
-      ]
+        ],
+      ),
     );
   }
 }
@@ -143,7 +169,7 @@ class RoundedRectanglePainter extends CustomPainter {
     final paint = Paint()
       ..shader = gradient.createShader(rect)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 5;
+      ..strokeWidth = 3;
 
     final rrect = RRect.fromRectAndRadius(
       rect,
