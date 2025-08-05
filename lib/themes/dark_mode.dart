@@ -6,6 +6,7 @@ ThemeData darkMode = ThemeData(
     primary: Colors.grey.shade700,
     secondary: Colors.grey.shade900,
     tertiary: Colors.grey.shade800,
-    inversePrimary: Colors.grey.shade300, 
+    inversePrimary: Colors.grey.shade300,
+    onTertiary: Colors.grey.shade900 
   ),
 );

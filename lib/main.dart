@@ -5,6 +5,7 @@ import 'package:manage_restaurant/components/generate_qr_code_page.dart';
 import 'package:manage_restaurant/components/scan_qr_code_page.dart';
 import 'package:manage_restaurant/pages/admin/admin_home_page.dart';
 import 'package:manage_restaurant/pages/admin/personnels_page.dart';
+import 'package:manage_restaurant/pages/settings_page.dart';
 import 'package:manage_restaurant/pages/worker/worker_home_page.dart';
 import 'package:manage_restaurant/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -53,6 +54,8 @@ class Routegenerator {
         return MaterialPageRoute(builder: (context)=> const GenerateQrCodePage());
       case '/PersonnelsPage':
         return MaterialPageRoute(builder: (context)=> PersonnelsPage());
+      case '/SettingsPage':
+        return MaterialPageRoute(builder: (context) => SettingsPage(),);
 
       default:
         return MaterialPageRoute(

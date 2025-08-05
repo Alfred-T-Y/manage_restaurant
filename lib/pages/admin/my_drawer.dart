@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manage_restaurant/components/my_drawer_tile.dart';
-import 'package:manage_restaurant/pages/settings_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -49,11 +48,9 @@ class MyDrawer extends StatelessWidget {
             icon: FontAwesomeIcons.gear, 
             onTap: (){
               Navigator.pop(context);
-              Navigator.push(
+              Navigator.pushNamed(
                 context, 
-                MaterialPageRoute(
-                  builder: (context) => SettingsPage(),
-                )
+                '/SettingsPage'
               );
             }
           ),

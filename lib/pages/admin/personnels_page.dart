@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 
-class PersonnelsPage extends StatelessWidget {
-  PersonnelsPage({super.key});
+class PersonnelsPage extends StatefulWidget {
+  const PersonnelsPage({super.key});
+
+  @override
+  State<PersonnelsPage> createState() => _PersonnelsPageState();
+}
+
+class _PersonnelsPageState extends State<PersonnelsPage> {
+  List<Map<String, dynamic>>personnelsSort = [];
+
+    @override
+  void initState() {
+    super.initState();
+    personnelsSort = sortPersonnels(personnels);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +31,22 @@ class PersonnelsPage extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: personnels.length,
-        itemBuilder: (context, index){
-          return PersonnelItem(
-            name: personnels[index]['name'],
-            role: personnels[index]['role'],
-            );
-        },
-
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: personnelsSort.length,
+          itemBuilder: (context, index){
+            return PersonnelItem(
+              name: personnelsSort[index]['name'],
+              role: personnelsSort[index]['role'],
+              );
+          },
+        
+        ),
       )
     );
 
   }
+
   final List<Map<String, dynamic>>personnels =[
     {
       'name':'toto',
@@ -40,7 +56,7 @@ class PersonnelsPage extends StatelessWidget {
     {
       'name':'toto',
       'email':'toto@gmail.com',
-      'role':'Kitchen_manager'  
+      'role':'Kitchen manager'  
     },
     {
       'name':'toto',
@@ -57,6 +73,48 @@ class PersonnelsPage extends StatelessWidget {
       'email':'toto@gmail.com',
       'role':'Manager'  
     }
+  ];
+}
+
+List<Map<String, dynamic>>sortPersonnels(List<Map<String, dynamic>>personnels){
+  List<Map<String, dynamic>>personnelsManager=[];
+  List<Map<String, dynamic>>personnelsKitchenManager=[];
+  List<Map<String, dynamic>>personnelsDeliver=[];
+  List<Map<String, dynamic>>personnelsWaiter=[];
+  List<Map<String, dynamic>>personnelsDefault=[];
+  List<Map<String, dynamic>>personnelsSort=[];
+
+  for (var personnel in personnels){
+        switch(personnel['role']){
+          case "Waiter":
+            personnelsWaiter.add(personnel);
+            break;
+          case "Kitchen manager":
+            personnelsKitchenManager.add(personnel);
+            break;
+          case "Deliver":
+            personnelsDeliver.add(personnel);
+            break;
+          case "Manager":
+            personnelsManager.add(personnel);
+            break;
+          default:
+            personnelsDefault.add(personnel);
+        }
+  }
+
+  personnelsWaiter.sort((a, b) => a['name'].compareTo(b['name']));
+  personnelsManager.sort((a, b) => a['name'].compareTo(b['name']));
+  personnelsDeliver.sort((a, b) => a['name'].compareTo(b['name']));
+  personnelsKitchenManager.sort((a, b) => a['name'].compareTo(b['name']));
+  personnelsSort.sort((a, b) => a['name'].compareTo(b['name']));
+
+  return personnelsSort = [
+    ...personnelsManager,
+    ...personnelsKitchenManager,
+    ...personnelsWaiter,
+    ...personnelsDeliver,
+    ...personnelsDefault
   ];
 }
 

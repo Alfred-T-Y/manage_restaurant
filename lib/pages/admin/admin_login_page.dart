@@ -69,90 +69,92 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
         ),
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: SingleChildScrollView(
-        child: Form(
-          key: formkey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //logo
-              Lottie.asset(
-                'assets/admin.json',
-                width: 200,
-                height: 200,
-                fit: BoxFit.contain,
-              ),
-          
-              const SizedBox(height: 25),
-          
-              //app slogan
-              Text(
-                "Manage your restaurant",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  color: Theme.of(context).colorScheme.inversePrimary,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Form(
+            key: formkey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //logo
+                Lottie.asset(
+                  'assets/admin.json',
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.contain,
                 ),
-              ),
-          
-              const SizedBox(height: 25),
-              
-              //emailtextfield
-              MyTextfield(
-                hintText: "Email", 
-                obscureText: false, 
-                controller: emailController,
-                focusNode: emailFocus,
-                focusnext: passWordFocus,
-                champ: "your email",
-                bordercolor: Color.fromARGB(255, 5, 93, 245),
-                ),
-              SizedBox(height: 10,),
-          
-              //password textfield
-              MyTextfield(
-                hintText: "Password", 
-                obscureText: true, 
-                controller: passwordController,
-                focusNode: passWordFocus,
-                focusnext: focussubmission,
-                champ: "your password",
-                bordercolor: Color.fromARGB(255, 5, 93, 245),
-                ),
-              SizedBox(height: 10,),
-          
-              //sign in button
-              MyButton(
-                onTap: login,
-                text: "Log in",
-                color: Colors.blue,
-                ),
-              SizedBox(height: 20,),
-          
-              //register now
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Not a member?",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+            
+                const SizedBox(height: 25),
+            
+                //app slogan
+                Text(
+                  "Manage your restaurant",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 16,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
-                  SizedBox(width: 5,),
-                  GestureDetector(
-                    onTap: widget.onTap,
-                    child: Text("Register now",
+                ),
+            
+                const SizedBox(height: 25),
+                
+                //emailtextfield
+                MyTextfield(
+                  hintText: "Email", 
+                  obscureText: false, 
+                  controller: emailController,
+                  focusNode: emailFocus,
+                  focusnext: passWordFocus,
+                  champ: "your email",
+                  bordercolor: Color.fromARGB(255, 5, 93, 245),
+                  ),
+                SizedBox(height: 10,),
+            
+                //password textfield
+                MyTextfield(
+                  hintText: "Password", 
+                  obscureText: true, 
+                  controller: passwordController,
+                  focusNode: passWordFocus,
+                  focusnext: focussubmission,
+                  champ: "your password",
+                  bordercolor: Color.fromARGB(255, 5, 93, 245),
+                  ),
+                SizedBox(height: 10,),
+            
+                //sign in button
+                MyButton(
+                  onTap: login,
+                  text: "Log in",
+                  color: Colors.blue,
+                  ),
+                SizedBox(height: 20,),
+            
+                //register now
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Not a member?",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10,),
-            ],
+                    SizedBox(width: 5,),
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: Text("Register now",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10,),
+              ],
+            ),
           ),
         ),
       ),

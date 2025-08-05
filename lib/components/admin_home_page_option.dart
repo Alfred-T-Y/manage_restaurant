@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manage_restaurant/components/back_color.dart';
 
 
 class AdminHomePageOption extends StatelessWidget {
@@ -6,76 +7,65 @@ class AdminHomePageOption extends StatelessWidget {
   final Color colorstart;
   final Color colorend;
   final Function() onPressed;
+  final String text;
 
   const AdminHomePageOption({super.key,
     required this.icon,
     required this.colorstart,
     required this.colorend,
-    required this.onPressed
+    required this.onPressed,
+    required this.text
   });
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SizedBox(
-          width: 130,
-          height: 130,
-          child: Center(
-            child: IconButton(
-              icon: Icon(icon,
-                    size: 50,
-                    color: Theme.of(context).colorScheme.primary,
-                ),
-              onPressed: onPressed ),
+    return GestureDetector(
+      onTap: onPressed,
+      child: Stack(
+        children: [
+          BackColor(
+            colorStart: colorstart, 
+            colorEnd: colorend, 
+            width: 130, 
+            heigh: 130, 
+            raduis: 20),
+          SizedBox(
+            width: 130,
+            height: 130,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      //SizedBox(width: 2,),
+                      Icon(
+                        icon,
+                        size: 35,
+                        color: Theme.of(context).colorScheme.onTertiary,)
+                    ],
+                  ),
+                  SizedBox(height: 25,),
+                  Row(
+                    children: [
+                      Text(
+                        text,
+                        style:TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onTertiary
+                        ),
+                        ),
+                    ],
+                  )
+                ]
+              ),
+            ),
           ),
-        ),
-        IgnorePointer(
-          child: CustomPaint(
-            size: Size(130, 130),
-            painter: RoundedRectanglePainter(
-              colorstart, colorend),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
 
-class RoundedRectanglePainter extends CustomPainter {
-  final Color colorstart;
-  final Color colorend;
 
-  RoundedRectanglePainter(
-    this.colorstart,
-    this.colorend,
-  ); 
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
-
-    final gradient = LinearGradient(
-      colors: [
-        colorstart,
-        colorend,
-      ],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-    );
-
-    final paint = Paint()
-      ..shader = gradient.createShader(rect)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 5;
-
-    final rrect = RRect.fromRectAndRadius(
-      rect,
-      Radius.circular(20),
-    );
-
-    canvas.drawRRect(rrect, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}

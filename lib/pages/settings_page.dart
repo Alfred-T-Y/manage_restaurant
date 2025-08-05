@@ -20,49 +20,51 @@ class SettingsPage extends StatelessWidget {
         ),
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Column(
-        children: [
-
-          //Dark mode
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: SettingsTile(
-                  text: "Dark Mode", 
-                  description: "Switch between light and dark mode", 
-                  icon: FontAwesomeIcons.moon
+      body: SafeArea(
+        child: Column(
+          children: [
+        
+            //Dark mode
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: SettingsTile(
+                    text: "Dark Mode", 
+                    description: "Switch between light and dark mode", 
+                    icon: FontAwesomeIcons.moon
+                  ),
                 ),
-              ),
-              CupertinoSwitch(
-                value: Provider.of<ThemeProvider>(context, listen: false).isDarkMode, 
-                onChanged: (value){
-                  Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-                },
-                ),
-              SizedBox(width: 10,),
-            ],
-          ),
-
-          const Spacer(),
-          
-          Row(
-            children: [
-              Expanded(
-                child: SettingsTile(
-                  text: "Delete account", 
-                  description: "All your datas would be lost", 
-                  icon: FontAwesomeIcons.trash,
-                  onTap: () {
-                    
+                CupertinoSwitch(
+                  value: Provider.of<ThemeProvider>(context, listen: false).isDarkMode, 
+                  onChanged: (value){
+                    Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
                   },
+                  ),
+                SizedBox(width: 10,),
+              ],
+            ),
+        
+            const Spacer(),
+            
+            Row(
+              children: [
+                Expanded(
+                  child: SettingsTile(
+                    text: "Delete account", 
+                    description: "All your datas would be lost", 
+                    icon: FontAwesomeIcons.trash,
+                    onTap: () {
+                      
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10,),
-
-        ],
+              ],
+            ),
+            SizedBox(height: 10,),
+        
+          ],
+        ),
       ),
 
     );
