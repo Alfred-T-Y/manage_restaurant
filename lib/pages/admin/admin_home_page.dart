@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manage_restaurant/components/admin_home_page_option.dart';
 import 'package:manage_restaurant/pages/admin/my_drawer.dart';
+import 'package:manage_restaurant/themes/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -13,6 +15,8 @@ class AdminHomePage extends StatefulWidget {
 class _AdminHomePageState extends State<AdminHomePage> {
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<ThemeProvider>(context, listen: false).isDarkMode;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -30,25 +34,27 @@ class _AdminHomePageState extends State<AdminHomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 70,),
+              SizedBox(height: 50,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AdminHomePageOption(
-                    icon: FontAwesomeIcons.user, 
-                    colorstart: Colors.green.shade200, 
-                    colorend: Colors.green.shade100,
-                    text: 'Personnels', 
+                    icon: CupertinoIcons.person, 
+                    colorstart: isDark ? Colors.green.shade400 : Colors.green.shade200, 
+                    colorend: isDark ? Colors.green.shade300 : Colors.green.shade100,
+                    title: 'Personnels',
+                    text: 'Manage your personnels', 
                     onPressed: (){
                       Navigator.pushNamed(context, '/PersonnelsPage');
                     },
                   ),
                   SizedBox(width: 25,),
                   AdminHomePageOption(
-                    icon: FontAwesomeIcons.basketShopping, 
-                    colorstart: Colors.red.shade200, 
-                    colorend: Colors.red.shade100,
-                    text: 'Stock', 
+                    icon: CupertinoIcons.shopping_cart, 
+                    colorstart: isDark ? Colors.red.shade400 : Colors.red.shade200, 
+                    colorend: isDark ? Colors.red.shade300 : Colors.red.shade100,
+                    title: 'Stock',
+                    text: 'Inventery of the stock', 
                     onPressed: (){})
                 ],
               ),
@@ -57,17 +63,19 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AdminHomePageOption(
-                    icon: FontAwesomeIcons.utensils, 
-                    colorstart: Colors.yellow.shade200, 
-                    colorend: Colors.yellow.shade100,
-                    text: 'Recipes', 
+                    icon: CupertinoIcons.square_list, 
+                    colorstart: isDark ? Colors.yellow.shade400 : Colors.yellow.shade200, 
+                    colorend: isDark ? Colors.yellow.shade300 : Colors.yellow.shade100,
+                    title: 'Recipes',
+                    text: 'Update your recipes', 
                     onPressed: (){}),
                   SizedBox(width: 25,),
                   AdminHomePageOption(
-                    icon: FontAwesomeIcons.store, 
-                    colorstart: Colors.blue.shade200, 
-                    colorend: Colors.blue.shade100,
-                    text: 'Stores', 
+                    icon: Icons.store, 
+                    colorstart: isDark ? Colors.blue.shade400 : Colors.blue.shade200, 
+                    colorend: isDark ? Colors.blue.shade300 : Colors.blue.shade100,
+                    title: 'Stores',
+                    text: 'All your stores',
                     onPressed: (){})
                 ],
               ),
@@ -76,17 +84,19 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AdminHomePageOption(
-                    icon: FontAwesomeIcons.chartBar, 
-                    colorstart: const Color.fromARGB(255, 240, 238, 148), 
-                    colorend: const Color.fromARGB(255, 243, 242, 171),
-                    text: 'Statistics', 
+                    icon: CupertinoIcons.chart_bar, 
+                    colorstart: isDark ? const Color.fromARGB(255, 194, 192, 80) : const Color.fromARGB(255, 240, 238, 148), 
+                    colorend: isDark ? const Color.fromARGB(255, 194, 192, 92) : const Color.fromARGB(255, 243, 242, 171),
+                    title: 'Statistics',
+                    text: 'Check your gains', 
                     onPressed: (){}),
                   SizedBox(width: 25,),
                   AdminHomePageOption(
-                    icon: FontAwesomeIcons.boxArchive, 
-                    colorstart: Colors.brown.shade200, 
-                    colorend: Colors.brown.shade100,
-                    text: 'Archives', 
+                    icon: CupertinoIcons.archivebox, 
+                    colorstart: isDark ? Colors.brown.shade400 : Colors.brown.shade200, 
+                    colorend: isDark ? Colors.brown.shade300 : Colors.brown.shade100,
+                    title: 'Archives',
+                    text: 'History of your sells', 
                     onPressed: (){})
                 ],
               ),

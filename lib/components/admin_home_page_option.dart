@@ -7,6 +7,7 @@ class AdminHomePageOption extends StatelessWidget {
   final Color colorstart;
   final Color colorend;
   final Function() onPressed;
+  final String title;
   final String text;
 
   const AdminHomePageOption({super.key,
@@ -14,11 +15,14 @@ class AdminHomePageOption extends StatelessWidget {
     required this.colorstart,
     required this.colorend,
     required this.onPressed,
+    required this.title,
     required this.text
   });
 
   @override
   Widget build(BuildContext context) {
+    double width = 140;
+    double heigh = 140;
     return GestureDetector(
       onTap: onPressed,
       child: Stack(
@@ -26,38 +30,39 @@ class AdminHomePageOption extends StatelessWidget {
           BackColor(
             colorStart: colorstart, 
             colorEnd: colorend, 
-            width: 130, 
-            heigh: 130, 
+            width: width, 
+            heigh: heigh, 
             raduis: 20),
           SizedBox(
-            width: 130,
-            height: 130,
+            width: width,
+            height: heigh,
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      //SizedBox(width: 2,),
-                      Icon(
-                        icon,
-                        size: 35,
-                        color: Theme.of(context).colorScheme.onTertiary,)
-                    ],
-                  ),
-                  SizedBox(height: 25,),
-                  Row(
-                    children: [
-                      Text(
-                        text,
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onTertiary
-                        ),
-                        ),
-                    ],
-                  )
+                  Icon(
+                    icon,
+                    size: 30,
+                    color: Theme.of(context).colorScheme.onTertiary,),
+                  SizedBox(height: 15,),
+                  Text(
+                    title,
+                    style:TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onTertiary
+                    ),
+                    ),
+                  SizedBox(height: 5,),
+                  Text(
+                    text,
+                    style:TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary
+                    ),
+                    ),
                 ]
               ),
             ),
