@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import 'package:manage_restaurant/components/admin_home_page_option.dart';
 import 'package:manage_restaurant/pages/admin/my_drawer.dart';
 import 'package:manage_restaurant/routes/app_pages.dart';
-import 'package:manage_restaurant/themes/theme_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:manage_restaurant/themes/dark_mode.dart';
+import 'package:manage_restaurant/themes/theme_manager.dart';
+
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -17,7 +18,8 @@ class AdminHomePage extends StatefulWidget {
 class _AdminHomePageState extends State<AdminHomePage> {
   @override
   Widget build(BuildContext context) {
-    bool isDark = Provider.of<ThemeProvider>(context, listen: false).isDarkMode;
+    ThemeManager theme = Get.find<ThemeManager>();
+    bool isDark = (theme.theme.value == darkMode);
 
     return Scaffold(
       appBar: AppBar(

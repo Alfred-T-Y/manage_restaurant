@@ -1,15 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:manage_restaurant/components/settings_tile.dart';
-import 'package:manage_restaurant/themes/theme_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:manage_restaurant/themes/dark_mode.dart';
+import 'package:manage_restaurant/themes/theme_manager.dart';
+
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ThemeManager theme = Get.find<ThemeManager>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -35,12 +38,14 @@ class SettingsPage extends StatelessWidget {
                     icon: FontAwesomeIcons.moon
                   ),
                 ),
-                CupertinoSwitch(
-                  value: Provider.of<ThemeProvider>(context, listen: false).isDarkMode, 
-                  onChanged: (value){
-                    Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-                  },
-                  ),
+                Obx(
+                    ()=>CupertinoSwitch(
+                    value: (theme.theme.value == darkMode), 
+                    onChanged: (value){
+                      theme.toggleTheme();
+                    },
+                    ),
+                ),
                 SizedBox(width: 10,),
               ],
             ),
