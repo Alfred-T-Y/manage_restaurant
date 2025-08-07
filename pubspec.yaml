@@ -42,6 +42,7 @@ dependencies:
   pretty_qr_code: ^3.4.0
   google_fonts: ^6.2.1
   get: ^4.7.2
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:
