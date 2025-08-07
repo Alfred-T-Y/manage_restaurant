@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 import 'package:manage_restaurant/components/my_dropdownbuttonformfield.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
+import 'package:manage_restaurant/routes/app_pages.dart';
 
 class WorkerRegisterPage extends StatefulWidget {
 
@@ -57,11 +59,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
 
     //home page
     if(formkey.currentState!.validate() /*&& choice != null*/){
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/WorkerHomePage',
-        (route)=> false
-      );
+      Get.offAllNamed(Routes.workerHomePage);
     }
   }
 
@@ -103,7 +101,7 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
               icon: FaIcon(FontAwesomeIcons.userShield),
               color: Theme.of(context).colorScheme.inversePrimary,
               onPressed: () {
-                Navigator.pop(context);
+                Get.back();
               },
             ),
           ],
@@ -229,18 +227,17 @@ class _WorkerRegisterPageState extends State<WorkerRegisterPage> {
                         color: Theme.of(context).colorScheme.primary,
                         size: 42,
                         ),
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context, 
-                          '/ScanQrCodePage',
-                          arguments: pagecolor,
-                          ).then((result) {
+                      onTap: () async {
+                          var result = await Get.toNamed(
+                            '/ScanQrCodePage',
+                            arguments: pagecolor,
+                          );
                           if (result != null) {
                             setState(() {
                               idController.text = result.toString();
                             });
                           }
-                          });},
+                        },
                     ),
                     SizedBox(width: 25,)
                   ],

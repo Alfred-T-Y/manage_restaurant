@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:manage_restaurant/components/admin_home_page_option.dart';
 import 'package:manage_restaurant/pages/admin/my_drawer.dart';
+import 'package:manage_restaurant/routes/app_pages.dart';
 import 'package:manage_restaurant/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -45,7 +47,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     title: 'Personnels',
                     text: 'Manage your personnels', 
                     onPressed: (){
-                      Navigator.pushNamed(context, '/PersonnelsPage');
+                      Get.toNamed(Routes.personnelsPage);
                     },
                   ),
                   SizedBox(width: 25,),

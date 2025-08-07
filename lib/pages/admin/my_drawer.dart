@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/route_manager.dart';
 import 'package:manage_restaurant/components/my_drawer_tile.dart';
+import 'package:manage_restaurant/routes/app_pages.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -28,7 +30,7 @@ class MyDrawer extends StatelessWidget {
             text: "Home", 
             icon: FontAwesomeIcons.house, 
             onTap: (){
-              Navigator.pop(context);
+              Get.back();
             }
           ),
           SizedBox(height: 10,),
@@ -37,9 +39,7 @@ class MyDrawer extends StatelessWidget {
             text: "QR code", 
             icon: FontAwesomeIcons.qrcode, 
             onTap:(){
-              Navigator.pushNamed(
-                context, 
-                '/GenerateQrCodePage');
+              Get.toNamed(Routes.generateQrCodePage);
             } ),
           SizedBox(height: 10,),
 
@@ -47,11 +47,8 @@ class MyDrawer extends StatelessWidget {
             text: "Settings", 
             icon: FontAwesomeIcons.gear, 
             onTap: (){
-              Navigator.pop(context);
-              Navigator.pushNamed(
-                context, 
-                '/SettingsPage'
-              );
+              Get.back();
+              Get.toNamed(Routes.settingsPage);
             }
           ),
           SizedBox(height: 10,),
@@ -62,11 +59,7 @@ class MyDrawer extends StatelessWidget {
             text: "Log out", 
             icon: FontAwesomeIcons.rightFromBracket, 
             onTap: (){
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/', 
-                (route)=> false
-              );
+              Get.offAllNamed(Routes.adminLoginorRegistration);
             }
           ),
           SizedBox(height: 10,),

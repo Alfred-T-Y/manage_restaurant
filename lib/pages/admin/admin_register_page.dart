@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
 import 'package:lottie/lottie.dart';
+import 'package:manage_restaurant/routes/app_pages.dart';
 
 class AdminRegisterPage extends StatefulWidget {
 
@@ -48,11 +50,7 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
 
     //home page
     if(formkey.currentState!.validate()){
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/AdminHomePage',
-        (route)=> false
-      );
+      Get.offAllNamed(Routes.adminHomePage);
     }
   }
 
@@ -67,10 +65,7 @@ class _AdminRegisterPageState extends State<AdminRegisterPage> {
               icon: FaIcon(FontAwesomeIcons.users),
               color: Theme.of(context).colorScheme.inversePrimary,
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  '/WorkerLoginOrRegister'
-                );    
+                Get.toNamed(Routes.workerLoginorRegistration);  
               },
             ),
           ],

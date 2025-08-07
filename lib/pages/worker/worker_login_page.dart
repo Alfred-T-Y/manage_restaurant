@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/route_manager.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
 import 'package:lottie/lottie.dart';
+import 'package:manage_restaurant/routes/app_pages.dart';
 
 class WorkerLoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -42,11 +44,7 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
     //home page
     if(formkey.currentState!.validate()){
       focussubmission.unfocus();
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/WorkerHomePage',
-        (route)=> false
-      );
+      Get.offAllNamed(Routes.workerHomePage);
     }
   }
 
@@ -61,7 +59,7 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
               icon: FaIcon(FontAwesomeIcons.userShield),
               color: Theme.of(context).colorScheme.inversePrimary,
               onPressed: () {
-                Navigator.pop(context);
+                Get.back();
               },
             ),
           ],
