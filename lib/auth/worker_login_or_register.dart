@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:manage_restaurant/modules/views/worker/worker_login_page.dart';
-import 'package:manage_restaurant/modules/views/worker/worker_register_page.dart';
+import 'package:manage_restaurant/modules/views/worker/worker_login_page_view.dart';
+import 'package:manage_restaurant/modules/views/worker/worker_register_page_view.dart';
 
 
 class WorkerLoginOrRegister extends StatefulWidget {
@@ -24,7 +24,7 @@ class _WorkerLoginOrRegisterState extends State<WorkerLoginOrRegister> {
 
   @override
   Widget build(BuildContext context) {
-    return workerLoginPage ? WorkerLoginPage(onTap: togglePage,) 
-    : WorkerRegisterPage(onTap: togglePage);
+    return workerLoginPage ? WorkerLoginPageView(onTap: togglePage,) 
+    : WorkerRegisterPageView(onTap: togglePage);
   }
 }

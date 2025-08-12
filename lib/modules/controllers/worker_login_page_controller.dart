@@ -2,29 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manage_restaurant/routes/app_pages.dart';
 
-class AdminLoginPageController extends GetxController {
+class WorkerLoginPageController extends GetxController{
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final emailFocus = FocusNode();
   final passWordFocus = FocusNode();
-  var focussubmission = FocusNode();
+  final focussubmission = FocusNode();
   final formkey = GlobalKey<FormState>();
-  final String lottie = 'assets/admin.json';
-  final color = Color.fromARGB(255, 5, 93, 245);
-  
-
-  @override
-  void onInit(){
-    // Écouter les changements de focussubmission
-    focussubmission.addListener(submission);
-    super.onInit();
-  }
+  final lottie = 'assets/worker_login.json';
+  final color = Color.fromARGB(255, 2, 122, 64); 
 
   void submission(){
     if(focussubmission.hasFocus){
       login();
     }
+  }
+
+    @override
+  void onInit() {
+    // Écouter les changements de focussubmission
+    focussubmission.addListener(submission);
+    super.onInit();
   }
 
   //login method
@@ -34,7 +33,7 @@ class AdminLoginPageController extends GetxController {
     //home page
     if(formkey.currentState!.validate()){
       focussubmission.unfocus();
-      Get.offAllNamed(Routes.adminHomePage);
+      Get.offAllNamed(Routes.workerHomePage);
     }
   }
 

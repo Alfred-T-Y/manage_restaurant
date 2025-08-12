@@ -48,7 +48,7 @@ class _AdminLoginPageViewState extends State<AdminLoginPageView> {
               children: [
                 //logo
                 Lottie.asset(
-                  'assets/admin.json',
+                  controller.lottie,
                   width: 200,
                   height: 200,
                   fit: BoxFit.contain,

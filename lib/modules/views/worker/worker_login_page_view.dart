@@ -1,52 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
 import 'package:lottie/lottie.dart';
-import 'package:manage_restaurant/routes/app_pages.dart';
+import 'package:manage_restaurant/modules/controllers/worker_login_page_controller.dart';
 
-class WorkerLoginPage extends StatefulWidget {
+class WorkerLoginPageView extends StatefulWidget {
   final void Function()? onTap;
 
-  const WorkerLoginPage({super.key, required this.onTap});
+  const WorkerLoginPageView({super.key, required this.onTap});
 
   @override
-  State<WorkerLoginPage> createState() => _WorkerLoginPageState();
+  State<WorkerLoginPageView> createState() => _WorkerLoginPageViewState();
 }
 
-class _WorkerLoginPageState extends State<WorkerLoginPage> {
+class _WorkerLoginPageViewState extends State<WorkerLoginPageView> {
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final emailFocus = FocusNode();
-  final passWordFocus = FocusNode();
-  final focussubmission = FocusNode();
-  final formkey = GlobalKey<FormState>();
-
-  void submission(){
-    if(focussubmission.hasFocus){
-      login();
-    }
-  }
-
-    @override
-  void initState() {
-    super.initState();
-    // Écouter les changements de focussubmission
-    focussubmission.addListener(submission);
-  }
-
-  //login method
-  void login(){
-    //authentification
-
-    //home page
-    if(formkey.currentState!.validate()){
-      focussubmission.unfocus();
-      Get.offAllNamed(Routes.workerHomePage);
-    }
-  }
+  final controller = Get.put(WorkerLoginPageController());
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +40,13 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
-            key: formkey,
+            key: controller.formkey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //logo
                 Lottie.asset(
-                  'assets/worker_login.json',
+                  controller.lottie,
                   width: 200,
                   height: 200,
                   fit: BoxFit.contain,
@@ -100,11 +71,11 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
                 MyTextfield(
                   hintText: "Email", 
                   obscureText: false, 
-                  controller: emailController,
-                  focusNode: emailFocus,
-                  focusnext: passWordFocus,
+                  controller: controller.emailController,
+                  focusNode: controller.emailFocus,
+                  focusnext: controller.passWordFocus,
                   champ: "your email",
-                  bordercolor: Color.fromARGB(255, 2, 122, 64),
+                  bordercolor: controller.color,
                   ),
                 SizedBox(height: 10,),
             
@@ -112,19 +83,19 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
                 MyTextfield(
                   hintText: "Password", 
                   obscureText: true, 
-                  controller: passwordController,
-                  focusNode: passWordFocus,
-                  focusnext: focussubmission,
+                  controller: controller.passwordController,
+                  focusNode: controller.passWordFocus,
+                  focusnext: controller.focussubmission,
                   champ: "your password",
-                  bordercolor: Color.fromARGB(255, 2, 122, 64),
+                  bordercolor: controller.color,
                   ),
                 SizedBox(height: 10,),
             
                 //sign in button
                 MyButton(
-                  onTap: login,
+                  onTap: controller.login,
                   text: "Log in",
-                  color: const Color.fromARGB(255, 2, 122, 64),
+                  color: controller.color,
                   ),
                 SizedBox(height: 20,),
             
