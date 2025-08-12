@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:manage_restaurant/pages/admin/admin_login_page.dart';
-import 'package:manage_restaurant/pages/admin/admin_register_page.dart';
+import 'package:manage_restaurant/modules/views/admin/admin_login_page_view.dart';
+import 'package:manage_restaurant/modules/views/admin/admin_register_page_view.dart';
 
 class AdminLoginOrRegister extends StatefulWidget {
   const AdminLoginOrRegister({super.key});
@@ -23,7 +23,7 @@ class _AdminLoginOrRegisterState extends State<AdminLoginOrRegister> {
 
   @override
   Widget build(BuildContext context) {
-    return showLoginPage ? AdminLoginPage(onTap: togglePage,) 
-    : AdminRegisterPage(onTap: togglePage);
+    return showLoginPage ? AdminLoginPageView(onTap: togglePage,) 
+    : AdminRegisterPageView(onTap: togglePage);
   }
 }

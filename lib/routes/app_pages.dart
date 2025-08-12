@@ -5,10 +5,10 @@ import 'package:manage_restaurant/auth/worker_login_or_register.dart';
 import 'package:manage_restaurant/components/error_page.dart';
 import 'package:manage_restaurant/components/generate_qr_code_page.dart';
 import 'package:manage_restaurant/components/scan_qr_code_page.dart';
-import 'package:manage_restaurant/pages/admin/admin_home_page.dart';
-import 'package:manage_restaurant/pages/admin/personnels_page.dart';
-import 'package:manage_restaurant/pages/settings_page.dart';
-import 'package:manage_restaurant/pages/worker/worker_home_page.dart';
+import 'package:manage_restaurant/modules/views/admin/admin_home_page.dart';
+import 'package:manage_restaurant/modules/views/admin/personnels_page.dart';
+import 'package:manage_restaurant/modules/views/settings_page.dart';
+import 'package:manage_restaurant/modules/views/worker/worker_home_page.dart';
 
 part 'app_routes.dart';
 

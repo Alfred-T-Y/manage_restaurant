@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manage_restaurant/components/admin_home_page_option.dart';
-import 'package:manage_restaurant/pages/admin/my_drawer.dart';
+import 'package:manage_restaurant/modules/views/admin/my_drawer.dart';
 import 'package:manage_restaurant/routes/app_pages.dart';
 import 'package:manage_restaurant/themes/theme_manager.dart';
 

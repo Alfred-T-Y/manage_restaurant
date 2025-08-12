@@ -4,49 +4,21 @@ import 'package:get/get.dart';
 import 'package:manage_restaurant/components/my_button.dart';
 import 'package:manage_restaurant/components/my_textfield.dart';
 import 'package:lottie/lottie.dart';
+import 'package:manage_restaurant/modules/controllers/admin_register_page_controller.dart';
 import 'package:manage_restaurant/routes/app_pages.dart';
 
-class AdminLoginPage extends StatefulWidget {
-  final void Function()? onTap;
+class AdminRegisterPageView extends StatefulWidget {
 
-  const AdminLoginPage({super.key, required this.onTap});
+  final void Function ()? onTap;
+  const AdminRegisterPageView({super.key, required this.onTap});
 
   @override
-  State<AdminLoginPage> createState() => _AdminLoginPageState();
+  State<AdminRegisterPageView> createState() => _AdminRegisterPageViewState();
 }
 
-class _AdminLoginPageState extends State<AdminLoginPage> {
+class _AdminRegisterPageViewState extends State<AdminRegisterPageView> {
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final emailFocus = FocusNode();
-  final passWordFocus = FocusNode();
-  final focussubmission = FocusNode();
-  final formkey = GlobalKey<FormState>();
-
-  void submission(){
-    if(focussubmission.hasFocus){
-      login();
-    }
-  }
-
-    @override
-  void initState() {
-    super.initState();
-    // Écouter les changements de focussubmission
-    focussubmission.addListener(submission);
-  }
-
-  //login method
-  void login(){
-    //authentification
-
-    //home page
-    if(formkey.currentState!.validate()){
-      focussubmission.unfocus();
-      Get.offAllNamed(Routes.adminHomePage);
-    }
-  }
+  final controller = Get.put(AdminRegisterPageController());
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +31,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               icon: FaIcon(FontAwesomeIcons.users),
               color: Theme.of(context).colorScheme.inversePrimary,
               onPressed: () {
-                Get.toNamed(Routes.workerLoginorRegistration);
+                Get.toNamed(Routes.workerLoginorRegistration);  
               },
             ),
           ],
@@ -69,13 +41,13 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
-            key: formkey,
+            key: controller.formkey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //logo
                 Lottie.asset(
-                  'assets/admin.json',
+                  controller.lottie,
                   width: 200,
                   height: 200,
                   fit: BoxFit.contain,
@@ -85,7 +57,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             
                 //app slogan
                 Text(
-                  "Manage your restaurant",
+                  "Create a new account",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic,
@@ -100,39 +72,75 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 MyTextfield(
                   hintText: "Email", 
                   obscureText: false, 
-                  controller: emailController,
-                  focusNode: emailFocus,
-                  focusnext: passWordFocus,
+                  controller: controller.emailController,
+                  focusNode: controller.emailFocus,
+                  focusnext: controller.nameFocus,
                   champ: "your email",
-                  bordercolor: Color.fromARGB(255, 5, 93, 245),
+                  bordercolor: controller.color,
                   ),
+                SizedBox(height: 10,),
+            
+                //Name 
+                MyTextfield(
+                  hintText: "Name and firstname", 
+                  obscureText: false, 
+                  controller: controller.nameController,
+                  focusNode: controller.nameFocus,
+                  focusnext: controller.nameRestaurantFocus,
+                  champ: 'your name and firstname',
+                  bordercolor: controller.color,
+                ),
+                SizedBox(height: 10,),
+            
+                //name of the restaurant
+                MyTextfield(
+                  hintText: "Name of your restaurant", 
+                  obscureText: false, 
+                  controller: controller.nameRestaurantController,
+                  focusNode: controller.nameRestaurantFocus,
+                  focusnext: controller.passWordFocus,
+                  champ: "the name of the restaurant",
+                  bordercolor: controller.color,
+                ),
                 SizedBox(height: 10,),
             
                 //password textfield
                 MyTextfield(
                   hintText: "Password", 
                   obscureText: true, 
-                  controller: passwordController,
-                  focusNode: passWordFocus,
-                  focusnext: focussubmission,
+                  controller: controller.passwordController,
+                  focusNode: controller.passWordFocus,
+                  focusnext: controller.confirmPassWordFocus,
                   champ: "your password",
-                  bordercolor: Color.fromARGB(255, 5, 93, 245),
+                  bordercolor: controller.color,
                   ),
                 SizedBox(height: 10,),
             
-                //sign in button
+                //confirm password textfield
+                MyTextfield(
+                  hintText: "Confirm the password", 
+                  obscureText: true, 
+                  controller: controller.confirmPassWordController,
+                  focusNode: controller.confirmPassWordFocus,
+                  focusnext: controller.focussubmission,
+                  champ: "your password again",
+                  bordercolor: controller.color,
+                  ),
+                SizedBox(height: 10,),
+            
+                //sign up button
                 MyButton(
-                  onTap: login,
-                  text: "Log in",
-                  color: Colors.blue,
+                  onTap: controller.signup,
+                  text: "Sign up",
+                  color: controller.color,
                   ),
                 SizedBox(height: 20,),
             
-                //register now
+                //Log in
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Not a member?",
+                    Text("Already have a account?",
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                       ),
@@ -140,7 +148,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                     SizedBox(width: 5,),
                     GestureDetector(
                       onTap: widget.onTap,
-                      child: Text("Register now",
+                      child: Text("Log in",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.inversePrimary,
                           fontWeight: FontWeight.bold,

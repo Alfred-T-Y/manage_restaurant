@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:manage_restaurant/pages/worker/worker_login_page.dart';
-import 'package:manage_restaurant/pages/worker/worker_register_page.dart';
+import 'package:manage_restaurant/modules/views/worker/worker_login_page.dart';
+import 'package:manage_restaurant/modules/views/worker/worker_register_page.dart';
 
 
 class WorkerLoginOrRegister extends StatefulWidget {
