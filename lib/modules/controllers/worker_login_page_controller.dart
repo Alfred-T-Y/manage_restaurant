@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:manage_restaurant/routes/app_pages.dart';
 
@@ -12,6 +13,13 @@ class WorkerLoginPageController extends GetxController{
   final formkey = GlobalKey<FormState>();
   final lottie = 'assets/worker_login.json';
   final color = Color.fromARGB(255, 2, 122, 64); 
+
+  final iconmysilverappbar = IconButton(
+    onPressed: () {
+      Get.back();
+    }, 
+    icon: FaIcon(FontAwesomeIcons.userShield), 
+  );
 
   void submission(){
     if(focussubmission.hasFocus){

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:manage_restaurant/routes/app_pages.dart';
 
@@ -12,6 +13,14 @@ class AdminLoginPageController extends GetxController {
   final formkey = GlobalKey<FormState>();
   final String lottie = 'assets/admin.json';
   final color = Color.fromARGB(255, 5, 93, 245);
+
+  
+  final iconmysilverappbar = IconButton(
+    onPressed: () {
+      Get.toNamed(Routes.workerLoginorRegistration);
+    }, 
+    icon: FaIcon(FontAwesomeIcons.users), 
+  );
   
 
   @override

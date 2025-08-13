@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:manage_restaurant/modules/views/admin/my_drawer.dart';
+import 'package:manage_restaurant/modules/views/admin/my_drawer_view.dart';
 
 class WorkerHomePage extends StatefulWidget {
   const WorkerHomePage({super.key});
@@ -23,7 +23,7 @@ class _WorkerHomePageState extends State<WorkerHomePage> {
           ),
         ),
       ),
-      drawer: MyDrawer(),
+      drawer: MyDrawerView(),
 
     );
   }
